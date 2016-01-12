@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var googleAuth = require('./auth/googleAuth.js');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
+var morgan =  require('morgan');
 var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var apikeys = require('./config/apikeys.js');
