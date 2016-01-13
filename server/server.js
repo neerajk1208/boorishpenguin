@@ -3,13 +3,12 @@ var bodyParser = require('body-parser');
 var googleAuth = require('./auth/googleAuth.js');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
-var morgan =  require('morgan');
 var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var apikeys = require('./config/apikeys.js');
 var controllers = require('./controllers/userControllers.js');
 var app = express();
-var port = process.env.PORT || 8001;
+// var port = process.env.PORT || 8001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,8 +19,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/routes.js')(app, express, googleAuth.ensureAuth);
 
-app.listen(port);
-module.exports = app;
+app.set("port", process.env.PORT || 8001);
+
+
+if (!module.parent) {
+  app.listen(app.get("port"));
+  console.log("Listening on", app.get("port"));
+}
+
+// app.listen(port);
 
 /* If you decide to move passport functionality to another file make sure you use the same instance of passport
 rather than requiring passport in multiple files */
@@ -54,3 +60,4 @@ passport.use(new GoogleStrategy({
       }
       })
 }));
+module.exports = app;
