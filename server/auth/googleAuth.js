@@ -4,6 +4,7 @@ var controller = require('../controllers/userControllers.js');
 
 exports.ensureAuth = function (req, res, next){
   // isAuthenticated is provided function that checks if the user is logged in to google
+  // return next();
   if (req.isAuthenticated()) { return next(); }
   // if logged in continue loading page
   res.send();
