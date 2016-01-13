@@ -136,7 +136,7 @@ angular.module('boorish.services', [])
         method: 'GET',
         url: '/townhall/users/' + userID
       }).then(function(res) {
-        return res.data.results.id;
+        return res.data.results;
       })
     },
 
