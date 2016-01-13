@@ -69,6 +69,7 @@ module.exports = {
               TagId: tag.id
             })
             .then(function(question) {
+              console.log('getting to proper controller fn')
               res.status(201).json(question);
             });
           });
