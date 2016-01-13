@@ -1,5 +1,6 @@
 var db = require('../db/index.js');
 var UCtrl = require('./userControllers.js');
+var Sequelize = require('sequelize');
 
 module.exports = {
   newAnswer: function(req, res) {
