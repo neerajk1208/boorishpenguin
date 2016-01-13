@@ -5,6 +5,7 @@ var sinon = require('sinon');
 // var app = require('../server.js');
 var oAuth = require('../auth/googleAuth.js')
 var db = require('../db/index.js');
+
 describe("Legacy - Server - REST API Routes", function() {
 
   var ensureAuthenticatedSpy;
@@ -47,9 +48,10 @@ describe("Legacy - Server - REST API Routes", function() {
         agent
           .post('/townhall/questions')
           .send(testQuestion)
-          // .expect(function(res) {
-          //   expect(res.body).to.exist;
-          // })
+          .expect(function(res) {
+            expect(res.body).to.exist;
+            console.log(res.body.id)
+          })
           .expect(201, done);
 
 
