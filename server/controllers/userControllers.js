@@ -47,6 +47,36 @@ module.exports = {
     });
   },
 
+  
+  // modUser: function(req, res){
+  //   var uid = req.params.id;
+  //   var mod = req.body.mod;
+  //   var that = this;
+
+  //   db.User.findById(uid)
+  //   .then(function(user){
+  //     if (mod === "admin") {
+  //       user.update({
+  //         RoleId: 1
+  //       })
+  //     }else if(mod === "teacher") {
+  //       user.update({
+  //         RoleId: 2
+  //       })
+  //     }else if(mod === "student") {
+  //       user.update({
+  //         RoleId: 3
+  //       })
+  //       .then(function() {
+  //         res.status(201).json(user);
+  //       })
+  //     }else{
+  //       res.sendStatus(404);
+  //     }
+  //   });
+  // },
+
+
   newUser: function(user) {
     db.User.create(user)
     .then(function(newUser) {
@@ -66,8 +96,8 @@ module.exports = {
     });
   },
 
-  isUserTeacher: function(uname, callback) {
-    db.User.find({
+  isUserTeacher: function(uname, callback) { //TODO: figure out where this shit is used and take it out/edit it to work with the new roles table.
+    db.User.find({//this is used in modAnswer in the Answer Controller.
       where: {
         username: uname
       }

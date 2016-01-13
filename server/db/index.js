@@ -20,6 +20,7 @@ var User = db.define('User', {
     allowNull: false,
     defaultValue: false
   },
+  //comment out above column, the join to role table will be created below.
   points: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -88,12 +89,38 @@ var Like = db.define('Like', {
     timestamps: false
 });
 
+/*
+var Role = db.define('Role',{
+    roleName: Sequelize.STRING
+  }, {
+    timestamps: false
+})
+
+var HelpRequest = db.define('HelpRequest', {
+    description: Sequelize.STRING,
+    closed: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  }, {
+    timestamps: false
+})
+*/
+
 Course.belongsToMany(User, {
   through: 'CourseUser'
 });
 User.belongsToMany(Course, {
   through: 'CourseUser'
 });
+
+/*
+User.belongsTo(Role); //should create a foreign key in the users table that refers to role
+
+User.belongsTo(HelpRequest, {as: to});  //this is tricky business, definitely check the logic on these two.
+HelpRequest.belongsTo(User, {as: from});
+*/
 
 User.hasMany(Post);
 Post.belongsTo(User);
@@ -119,7 +146,20 @@ User.sync()
 .then(function() {
   return Like.sync();
 });
+/*
+.then(function(){ //not sure if ordering is important, but if it is, then role may even need to be done first, since users is dependant on it.
+  return Role.sync();
+}
+.then(function(){
+  return HelpRequest.sync();
+}*/
 
+//***Prepopulate Role Table***
+/*
+Role.create({roleName: "Administrator"})
+Role.create({roleName: "Teacher"})
+Role.create({roleName: "Student"})
+*/
 exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;

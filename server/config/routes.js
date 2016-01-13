@@ -23,6 +23,7 @@ module.exports = function(app, express) {
 
   app.get('/townhall/users', oAuth.ensureAuth, userControllers.allUsers);
   app.get('/townhall/users/:id', oAuth.ensureAuth, userControllers.oneUser);
+  //app.post('/townhall/users/:id', oAuth.ensureAuth, userControllers.modUser) //used to modify users to be admins.
   app.post('/townhall/signup', userControllers.newUser);
 
   app.get('/townhall/courses', oAuth.ensureAuth, courseControllers.allCourses);
