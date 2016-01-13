@@ -66,7 +66,7 @@ angular.module('boorishpenguin', [
     })
     .state('questionid', {
       url: '/questions/:id', 
-      templateUrl: 'app/answers/anwers.html', 
+      templateUrl: 'app/answers/answers.html', 
       controller: 'answersController'
     })
     .state('users', {
