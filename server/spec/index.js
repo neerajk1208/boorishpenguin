@@ -9,7 +9,7 @@ var db = require('../db/index.js');
 describe("Legacy - Server - REST API Routes", function() {
 
   var ensureAuthenticatedSpy;
-
+  var postId;
   before(function() {
     console.log('before setup')
       //important to stub before we load our app
@@ -51,8 +51,19 @@ describe("Legacy - Server - REST API Routes", function() {
           .expect(function(res) {
             expect(res.body).to.exist;
             console.log(res.body.id)
+            postId = res.body.id;
           })
           .expect(201, done);
+
+
+      })
+    })
+
+    describe('DELETE', function() {
+      it('responds with 201 (Created) and the json data for the new question', function(done) {
+        agent
+          .delete('/townhall/questions/' + postId)
+          .expect(200, done);
 
 
       })
