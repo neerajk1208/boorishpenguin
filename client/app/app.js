@@ -84,4 +84,9 @@ angular.module('boorishpenguin', [
       templateUrl: 'app/users/users.html', 
       controller: 'UsersController'
     })
+     .state('dashboard.admin', {
+      url: '/admin', 
+      templateUrl: 'app/users/users.html', 
+      controller: 'UsersController'
+    })
 });

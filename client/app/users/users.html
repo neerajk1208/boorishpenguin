@@ -18,10 +18,10 @@
   <!--</body>-->
 <!--</html>-->
 
-<div ng-module='boorish.users'>
-  <div ng-model='users' ng-controller='UsersController'>
+<div>
+  <div>
     <ul>
-      <li ng-repeat="user in users">
+      <li ui-sref="dashboard" ui-sref-active="active" ng-repeat="user in users.results">
         <span>{{user.name}}</span>
       </li>
     </ul>

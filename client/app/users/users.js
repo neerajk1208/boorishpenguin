@@ -28,4 +28,6 @@ angular.module('boorish.users', [])
       });
     }
 
+    $scope.allUsers();
+
   });
