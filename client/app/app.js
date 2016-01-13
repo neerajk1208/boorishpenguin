@@ -49,7 +49,7 @@ angular.module('boorishpenguin', [
 
   $urlRouterProvider.otherwise('/signin')
   $stateProvider
-    .state('questions', {
+    .state('home', {
       url: '/', 
       templateUrl: 'app/questions/questions.html', 
       controller: 'questionsController'
