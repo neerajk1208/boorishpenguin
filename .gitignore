@@ -7,7 +7,7 @@
 build/
 dist/
 node_modules/
-bower_components/
-lib/
+client/bower_components/
 
+.DS_Store
 */.DS_Store
