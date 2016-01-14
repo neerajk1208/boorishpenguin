@@ -118,8 +118,7 @@ User.belongsToMany(Course, {
 
 User.belongsTo(Role); //should create a foreign key in the users table that refers to role
 
-
-HelpRequest.belongsTo(User, {as: "To"});
+HelpRequest.belongsTo(User, {as: "To"});//creates two foreign keys, each called name + Id. So, HelpRequest now has a ToId and a FromId column, both referring to the user table
 HelpRequest.belongsTo(User, {as: "From"});
 
 
