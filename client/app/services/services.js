@@ -132,7 +132,7 @@ angular.module('boorish.services', [])
     updateUser: function(user) {
       return $http({
         method: 'POST', 
-        url: '/townhall/users/' + user.id, 
+        url: '/townhall/users', 
         data: user
       }).then(function(res) {
         return res.data.results;
