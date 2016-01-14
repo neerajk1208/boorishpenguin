@@ -12,8 +12,7 @@ describe("Legacy - Server - REST API Routes", function() {
   var questionId;
   var answerId;
   before(function() {
-    console.log('before setup')
-      //important to stub before we load our app
+    //important to stub before we load our app
     ensureAuthenticatedSpy = sinon.stub(oAuth, 'ensureAuth');
 
     ensureAuthenticatedSpy.callsArg(2);
@@ -27,8 +26,8 @@ describe("Legacy - Server - REST API Routes", function() {
 
 
 
-  describe('/townhall/questions', function() {
-    describe('GET', function() {
+  describe('Questions and Answers', function() {
+    describe('GET ALL POSTS', function() {
       it('responds with a 200 (OK) and the json data for all questions', function(done) {
         agent
           .get('/townhall/questions')
@@ -36,7 +35,7 @@ describe("Legacy - Server - REST API Routes", function() {
       })
     })
 
-    describe('POST', function() {
+    describe('POST NEW QUESTION', function() {
       it('responds with 201 (Created) and the json data for the new question', function(done) {
         var testQuestion = {
           text: "test post body",
@@ -51,7 +50,28 @@ describe("Legacy - Server - REST API Routes", function() {
           .send(testQuestion)
           .expect(function(res) {
             expect(res.body).to.exist;
-            console.log(res.body.id)
+            postId = res.body.id;
+          })
+          .expect(201, done);
+
+
+      })
+    })
+
+    describe('MOD EXISTING QUESTION', function() {
+      it('responds with 201 (Created) and the json data for the new question', function(done) {
+        var testMod = {
+          mod: "good"
+        }
+
+        agent
+          .post('/townhall/questions/' + postId)
+          .set({
+            "testing": true
+          })
+          .send(testMod)
+          .expect(function(res) {
+            expect(res.body).to.exist;
             postId = res.body.id;
           })
           .expect(201, done);
@@ -64,7 +84,7 @@ describe("Legacy - Server - REST API Routes", function() {
   })
 
   describe('POST', function() {
-    it('responds with 201 (Created) and the json data for the new question', function(done) {
+    it('responds with 201 (Created) and the json data for the new answer', function(done) {
       var testAnswer = {
         id_question: postId,
         id_user: 1,
@@ -76,7 +96,6 @@ describe("Legacy - Server - REST API Routes", function() {
         .send(testAnswer)
         .expect(function(res) {
           expect(res.body).to.exist;
-          console.log(res.body.id)
           answerId = res.body.id;
         })
         .expect(201, done);
@@ -86,7 +105,7 @@ describe("Legacy - Server - REST API Routes", function() {
   })
 
   describe('DELETE', function() {
-    it('responds with 204 (Removed) for successfully finding and deleting question', function(done) {
+    it('responds with 204 (Removed) for successfully finding and deleting answer', function(done) {
       agent
         .delete('/townhall/answers/' + answerId)
         .set({
@@ -106,8 +125,6 @@ describe("Legacy - Server - REST API Routes", function() {
           "testing": true
         })
         .expect(204, done);
-
-
     })
   })
 })
