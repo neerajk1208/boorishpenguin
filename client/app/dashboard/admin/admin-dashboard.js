@@ -10,6 +10,7 @@ angular.module('boorish.admin', [])
     //then 
       //console.log success
       user[prop] = value;
+      user.name = user.name_first + ' ' + user.name_last;
       Users.updateUser(user)
         .then(function() {
           console.log("Successfully updated the user.")

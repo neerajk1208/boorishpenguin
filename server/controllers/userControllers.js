@@ -10,6 +10,7 @@ module.exports = {
         return {
           id: user.id,
           // isTeacher: user.isTeacher,//change this to role
+          username: user.username,
           name: user.name,
           name_first: user.name_first,
           name_last: user.name_last,
@@ -78,6 +79,7 @@ module.exports = {
 
     db.User.findById(body.id)
     .then(function(user){
+      console.log("Check it out", body)
       user.update({
         username: body.username,
         name: body.name,
