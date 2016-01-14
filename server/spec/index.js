@@ -60,7 +60,7 @@ describe("Legacy - Server - REST API Routes", function() {
     })
 
     describe('DELETE', function() {
-      it('responds with 201 (Created) and the json data for the new question', function(done) {
+      it('responds with 204 (Removed) for successfully finding and deleting question', function(done) {
         agent
           .delete('/townhall/questions/' + postId)
           .set({"testing":true})
