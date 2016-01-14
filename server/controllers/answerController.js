@@ -5,7 +5,7 @@ var Sequelize = require('sequelize');
 module.exports = {
   newAnswer: function(req, res) {
     var txt = req.body.text;
-    var uid = req.body.id_user;
+    var uid = req.body.id_user.id;
     var qid = req.body.id_question;
 
     db.Post.findById(qid)
