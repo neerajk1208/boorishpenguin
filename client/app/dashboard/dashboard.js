@@ -7,7 +7,8 @@ angular.module('boorish.dashboard', [])
   $scope.user = {
     name: '',
     email: '', 
-    image: ''
+    image: '', 
+    RoleId: ''
   };
 
   $scope.getUserInfo = function() {
@@ -15,10 +16,22 @@ angular.module('boorish.dashboard', [])
     Users.getUserWithId()
       .then(function(results) {
         console.log('This was successful');
-        console.log("These are the results", results.name);
+        console.log("These are the results", results);
         $scope.user.name = results.name;
         $scope.user.email = results.email;
         $scope.user.image = results.image;
+        $scope.user.RoleId = results.RoleId;
+
+        if ($scope.user.RoleId === 1) {
+          console.log('hi');
+          console.log($scope.user);
+          $location.path('/dashboard/admin');
+        } else if ($scope.user.RoleId === 2) {
+          $location.path('/dashboard/teacher');
+        } else if ($scope.user.RoleId === 3) {
+          $location.path('/dashboard/student');
+        }
+
       });
   }
 
@@ -28,6 +41,7 @@ angular.module('boorish.dashboard', [])
       // else show questions
   } else {
     $scope.getUserInfo();
+
   }
 
 

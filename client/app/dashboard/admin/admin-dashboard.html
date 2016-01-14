@@ -1,0 +1,41 @@
+<div ng-module='boorish.admin'>
+  <div ng-controller='AdminController'>
+    <table>
+  <tr>
+    <th class='user-header'></td>
+    <th class='user-header'> First Name </td>
+    <th class='user-header'> Last Name </td>
+    <th class='user-header'> Email Address </td>
+    <th class='user-header'> Points </td>
+    <th class='user-header'> Role Id </td>
+
+  </tr>
+  <tr class='user-row' ng-repeat="user in users.results">
+    <td class='user-row-item'><img class='user-row-image' src="{{ user.image }}" /></td>
+    <td class='user-row-item'>{{ user.name_first }}</td>
+    <td class='user-row-item'>{{ user.name_last }}</td>
+    <td class='user-row-item'>{{ user.email }}</td>
+    <td class='user-row-item'>{{ user.points }}</td>
+    <td class='user-row-item'>{{ user.RoleId }}</td>
+    <td> <button ng-click="editContact(contact)">Edit</button> </td>
+
+    
+    <!-- <form ng-show="editing" ng-submit="editing = false">
+     <label>RoleId</label>
+     <input type="text"  placeholder="Role" ng-required/>
+     <button class="btn" type="submit">Save</button>
+    </form>  -->
+  </tr>
+
+    </table>
+    <!-- <ul >
+      <li ng-repeat='user in users.results'>
+        <img src='{{user.image}}'>
+        <span>{{user.name}}</span>
+        <span> {{user.RoleId}} </span>
+      </li>
+    </ul> -->
+  </div>
+</div>
+
+
