@@ -38,11 +38,11 @@ describe("Legacy - Server - REST API Routes", function() {
     describe('POST', function() {
       it('responds with 201 (Created) and the json data for the new question', function(done) {
         var testQuestion = {
-          text: "test",
-          id_user: "2",
-          course: "test2",
-          tag: "test2",
-          title: "test"
+          text: "test post body",
+          id_user: "1",
+          course: "test1",
+          tag: "test1",
+          title: "test post title"
         };
 
         agent
@@ -63,7 +63,8 @@ describe("Legacy - Server - REST API Routes", function() {
       it('responds with 201 (Created) and the json data for the new question', function(done) {
         agent
           .delete('/townhall/questions/' + postId)
-          .expect(200, done);
+          .set({"testing":true})
+          .expect(204, done);
 
 
       })
