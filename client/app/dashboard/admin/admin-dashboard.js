@@ -5,15 +5,16 @@ angular.module('boorish.admin', [])
   Auth.setUser();
   $scope.users;
 
-  $scope.validate = function(value, user) {
+  $scope.validate = function(value, user, prop) {
     //call service function for update user, pass the value
     //then 
       //console.log success
+      user[prop] = value;
       Users.updateUser(user)
         .then(function() {
           console.log("Successfully updated the user.")
-          return value;
         })
+      return value;
   }
 
   $scope.getUsers = function() {
