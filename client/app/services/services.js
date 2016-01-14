@@ -129,6 +129,16 @@ angular.module('boorish.services', [])
       });
     },
 
+    updateUser: function(user) {
+      return $http({
+        method: 'POST', 
+        url: '/townhall/users/' + user.id, 
+        data: user
+      }).then(function(res) {
+        return res.data.results;
+      })
+    },
+
     // users the userID that is stored in localStorage to obtain the user from the database
     getUserWithId: function() {
       var userID = $window.localStorage.getItem('com.boorish');

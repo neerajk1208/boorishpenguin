@@ -3,8 +3,18 @@ angular.module('boorish.admin', [])
 .controller('AdminController', function($scope, $location, Auth, Users) {
 
   Auth.setUser();
-
   $scope.users;
+
+  $scope.validate = function(value, user) {
+    //call service function for update user, pass the value
+    //then 
+      //console.log success
+      Users.updateUser(user)
+        .then(function() {
+          console.log("Successfully updated the user.")
+          return value;
+        })
+  }
 
   $scope.getUsers = function() {
     //call getuserbyID service function
@@ -16,8 +26,8 @@ angular.module('boorish.admin', [])
       })
   };
 
-  $scope.getTemplate = function(user) {
-
+  $scope.getTemplate = function() {
+    console.log()
   };
 
   // if user is not authenticated, reroute to /signin

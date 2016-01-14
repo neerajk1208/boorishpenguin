@@ -10,7 +10,8 @@ angular.module('boorishpenguin', [
   'boorish.teacher',
   'boorish.student',
   'ngRoute', 
-  'ui.router'
+  'ui.router', 
+  'gg.editableText'
   ])
 
 .config(function ($routeProvider, $stateProvider, $sceProvider, $urlRouterProvider) {
