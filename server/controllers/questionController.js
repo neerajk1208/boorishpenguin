@@ -99,7 +99,7 @@ module.exports = {
             var authorname = user.username;
 
             UCtrl.isUserTeacher(reqName, function(is) {
-              if (is || reqName === authorname) {
+              if (is === 1 || is === 2 || reqName === authorname) {
                 user.update({
                     points: user.points - 1
                   })
@@ -251,14 +251,14 @@ module.exports = {
                 });
             } else {
               UCtrl.isUserTeacher(reqName, function(is) {
-                if (mod === 'answered' && (reqName === authorname || is)) {
+                if (mod === 'answered' && (reqName === authorname || is === 1 || is ===2)) {
                   question.update({
                       isAnswered: !curAnswered
                     })
                     .then(function() {
                       res.status(201).json(question);
                     });
-                } else if (is) {
+                } else if (is === 1 || is === 2) {
                   if (mod === 'good') {
                     // admin only
                     question.update({

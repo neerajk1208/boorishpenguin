@@ -51,29 +51,23 @@ module.exports = {
     var testing = req.headers.testing
     if (testing && !req.user) {
       var reqName = 'testuser@test.com'
-      var qid = req.params.id;
+      var aid = req.params.id;
       var mod = req.body.mod;
     } else {
-      var qid = req.params.id;
+      var aid = req.params.id;
       var mod = req.body.mod;
       var reqName = req.user.profile.emails[0].value;
     }
-
-
-
-    var aid = req.params.id;
-    var mod = req.body.mod;
-    var reqName = req.user.profile.emails[0].value;
-
     db.Post.findById(aid)
       .then(function(answer) {
         var uid = answer.UserId;
 
         db.User.findById(uid)
+
           .then(function(user) {
             if (mod === 'good') {
               UCtrl.isUserTeacher(reqName, function(is) {
-                if (is) {
+                if (is === 1 || is === 2) {
                   answer.update({
                       isGood: !answer.isGood
                     })
@@ -173,7 +167,7 @@ module.exports = {
             var authorname = user.username;
 
             UCtrl.isUserTeacher(reqName, function(is) {
-              if (is || reqName === authorname) {
+              if (is === 1 || is === 2 || reqName === authorname) {
                 var qid = answer.QuestionId;
 
                 db.Post.findById(qid)

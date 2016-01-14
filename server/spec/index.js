@@ -99,7 +99,7 @@ describe("Legacy - Server - REST API Routes", function() {
       it('responds with 201 (Created) and the json data for the new answer', function(done) {
         var testAnswer = {
           id_question: questionId,
-          id_user: 1,
+          id_user: {id: 1},
           text: "testAnswer"
         };
         agent
@@ -120,7 +120,7 @@ describe("Legacy - Server - REST API Routes", function() {
         }
 
         agent
-          .post('/townhall/questions/' + answerId)
+          .post('/townhall/answers/' + answerId)
           .set({
             "testing": true
           })
@@ -134,7 +134,7 @@ describe("Legacy - Server - REST API Routes", function() {
     describe('DELETE QUESTION', function() {
       it('responds with 204 (Removed) for successfully finding and deleting question', function(done) {
         agent
-          .delete('/townhall/answers/' + questionId)
+          .delete('/townhall/questions/' + questionId)
           .set({
             "testing": true
           })
