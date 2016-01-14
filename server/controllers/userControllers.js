@@ -47,24 +47,30 @@ module.exports = {
     });
   },
 
-  // readRole: function(req, res) {
-  //   roleId = req.params.roleId;//pulls the roleId from the route
+  readRole: function(req, res) {
+    roleId = req.params.roleId;//pulls the roleId from the route
 
-  //   db.User.findAll({
-  //     where: {
-  //       RoleId: roleId
-  //     }
-  //   })
-  //   .then(function(users) {
-  //     var formattedUser = users.map(function(user) {
-  //       return {
-  //         id = user.id,
-  //         name = user.name,
-  //         email = user.email
-  //       }
-  //     })
-  //   }
-  // }
+    db.User.findAll({
+      where: {
+        RoleId: roleId
+      }, 
+      include: [db.Role]
+    })
+    .then(function(users) {
+      var formattedUsers = users.map(function(user) {
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: db.Role.name
+        }
+      });
+
+      userRoles = {};
+      userRoles.results = formattedUsers;
+      res.json(userRoles);
+    })
+  },
 
   
   modUser: function(req, res){
