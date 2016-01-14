@@ -95,18 +95,18 @@ var Role = db.define('Role',{
   }, {
     timestamps: false
 })
-/*
-var HelpRequest = db.define('HelpRequest', {
-    description: Sequelize.STRING,
-    closed: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-  }, {
-    timestamps: false
-})
-*/
+
+// var HelpRequest = db.define('HelpRequest', {
+//     description: Sequelize.STRING,
+//     closed: {
+//       type: Sequelize.BOOLEAN,
+//       allowNull: false,
+//       defaultValue: false
+//     },
+//   }, {
+//     timestamps: false
+// })
+
 
 Course.belongsToMany(User, {
   through: 'CourseUser'
@@ -118,10 +118,10 @@ User.belongsToMany(Course, {
 
 User.belongsTo(Role); //should create a foreign key in the users table that refers to role
 
-/*
-User.belongsTo(HelpRequest, {as: to});  //this is tricky business, definitely check the logic on these two.
-HelpRequest.belongsTo(User, {as: from});
-*/
+
+// User.belongsTo(HelpRequest, {as: "to"});  //this is tricky business, definitely check the logic on these two.
+// HelpRequest.belongsTo(User, {as: "from"});
+
 
 User.hasMany(Post);
 Post.belongsTo(User);
