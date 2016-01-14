@@ -152,7 +152,7 @@ Role.sync()
 })
 .then(function(){
   return HelpRequest.sync();
-});
+})
 
 
 //***Prepopulate Role Table***
