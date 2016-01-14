@@ -47,6 +47,20 @@ module.exports = {
   },
 
   modAnswer: function(req, res) {
+
+    var testing = req.headers.testing
+    if (testing && !req.user) {
+      var reqName = 'testuser@test.com'
+      var qid = req.params.id;
+      var mod = req.body.mod;
+    } else {
+      var qid = req.params.id;
+      var mod = req.body.mod;
+      var reqName = req.user.profile.emails[0].value;
+    }
+
+
+
     var aid = req.params.id;
     var mod = req.body.mod;
     var reqName = req.user.profile.emails[0].value;
