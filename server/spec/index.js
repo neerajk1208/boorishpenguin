@@ -9,7 +9,8 @@ var db = require('../db/index.js');
 describe("Legacy - Server - REST API Routes", function() {
 
   var ensureAuthenticatedSpy;
-  var postId;
+  var questionId;
+  var answerId;
   before(function() {
     console.log('before setup')
       //important to stub before we load our app
@@ -59,15 +60,54 @@ describe("Legacy - Server - REST API Routes", function() {
       })
     })
 
-    describe('DELETE', function() {
-      it('responds with 204 (Removed) for successfully finding and deleting question', function(done) {
-        agent
-          .delete('/townhall/questions/' + postId)
-          .set({"testing":true})
-          .expect(204, done);
+
+  })
+
+  describe('POST', function() {
+    it('responds with 201 (Created) and the json data for the new question', function(done) {
+      var testAnswer = {
+        id_question: postId,
+        id_user: 1,
+        text: "testAnswer"
+      };
+
+      agent
+        .post('/townhall/answers')
+        .send(testAnswer)
+        .expect(function(res) {
+          expect(res.body).to.exist;
+          console.log(res.body.id)
+          answerId = res.body.id;
+        })
+        .expect(201, done);
 
 
-      })
+    })
+  })
+
+  describe('DELETE', function() {
+    it('responds with 204 (Removed) for successfully finding and deleting question', function(done) {
+      agent
+        .delete('/townhall/answers/' + answerId)
+        .set({
+          "testing": true
+        })
+        .expect(204, done);
+
+
+    })
+  })
+
+  describe('DELETE', function() {
+    it('responds with 204 (Removed) for successfully finding and deleting question', function(done) {
+      agent
+        .delete('/townhall/questions/' + postId)
+        .set({
+          "testing": true
+        })
+        .expect(204, done);
+
+
     })
   })
 })
