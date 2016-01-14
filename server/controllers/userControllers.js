@@ -15,7 +15,8 @@ module.exports = {
           name_last: user.name_first,
           email: user.email,
           points: user.points,
-          image: user.picture
+          image: user.picture,
+          RoleId: user.RoleId
         }
       });
 
@@ -38,7 +39,8 @@ module.exports = {
         name_last: user.name_first,
         email: user.email,
         points: user.points,
-        image: user.picture
+        image: user.picture,
+        RoleId: user.RoleId
       }
 
       user = {};
