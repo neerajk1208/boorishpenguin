@@ -9,13 +9,12 @@
     <th class='user-header'> Link </th>
 
   </tr>
-  <tr class='user-row' ng-repeat="user in users.results">
-    <td class='user-row-item'><img class='user-row-image' src="{{ user.image }}" /></td>
-    <td class='user-row-item' editable-text="user.name_first" on-change="validate(value, user)"></td>
-    <td class='user-row-item' editable-text="user.name_last" on-change="validate(value, user)"></td>
-    <td class='user-row-item' editable-text="user.email" on-change="validate(value, user)"></td>
-    <td class='user-row-item'>{{ user.points }}</td>
-    <td class='user-row-item' editable-text="user.RoleId" on-change="validate(value, user)"></td>
+  <tr class='user-row' ng-repeat="request in request.results">
+    <td class='user-row-item' editable-text="request.name_first"></td>
+    <td class='user-row-item' editable-text="request.name_last"></td>
+    <td class='user-row-item' editable-text="request.email" ></td>
+    <td class='user-row-item'>{{ request.points }}</td>
+    <td class='user-row-item' editable-text="request.RoleId"></td>
 
     
     <!-- <form ng-show="editing" ng-submit="editing = false">

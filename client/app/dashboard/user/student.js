@@ -4,7 +4,7 @@ angular.module('boorish.student', [])
 
   Auth.setUser();
 
-  $scope = users = [];
+  $scope.requests;
 
   /*
 
