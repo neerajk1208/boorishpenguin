@@ -20,6 +20,7 @@ var User = db.define('User', {
     allowNull: false,
     defaultValue: false
   },
+  //comment out above column, the join to role table will be created below.
   points: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -88,12 +89,39 @@ var Like = db.define('Like', {
     timestamps: false
 });
 
+
+var Role = db.define('Role',{
+    roleName: Sequelize.STRING
+  }, {
+    timestamps: false
+})
+/*
+var HelpRequest = db.define('HelpRequest', {
+    description: Sequelize.STRING,
+    closed: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  }, {
+    timestamps: false
+})
+*/
+
 Course.belongsToMany(User, {
   through: 'CourseUser'
 });
 User.belongsToMany(Course, {
   through: 'CourseUser'
 });
+
+
+User.belongsTo(Role); //should create a foreign key in the users table that refers to role
+
+/*
+User.belongsTo(HelpRequest, {as: to});  //this is tricky business, definitely check the logic on these two.
+HelpRequest.belongsTo(User, {as: from});
+*/
 
 User.hasMany(Post);
 Post.belongsTo(User);
@@ -106,7 +134,10 @@ Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
 Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
 User.belongsToMany(Post, {through: 'Like'});
 
-User.sync()
+Role.sync()
+.then(function(){
+  return User.sync()
+})
 .then(function() {
   return Tag.sync();
 })
@@ -118,7 +149,22 @@ User.sync()
 })
 .then(function() {
   return Like.sync();
-});
+})
+/*
+.then(function(){
+  return HelpRequest.sync();
+}
+*/
+
+//***Prepopulate Role Table***
+//This is Raw SQL, to be run once on each dev environment, and once before deployment
+/*
+INSERT INTO roles (roleName) VALUES ("Administrator");
+INSERT INTO roles (roleName) VALUES ("Teacher");
+INSERT INTO roles (roleName) VALUES ("Student");
+*/
+
+
 
 exports.User = User;
 exports.Course = Course;
