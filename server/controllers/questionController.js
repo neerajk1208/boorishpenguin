@@ -84,12 +84,11 @@ module.exports = {
       var reqName = 'testuser@test.com'
       var qid = req.params.id;
       var mod = req.body.mod;
-
     } else {
+
       var qid = req.params.id;
       var mod = req.body.mod;
       var reqName = req.user.profile.emails[0].value;
-
     }
 
     db.Post.findById(qid)
