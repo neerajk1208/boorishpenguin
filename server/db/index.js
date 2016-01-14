@@ -96,16 +96,16 @@ var Role = db.define('Role',{
     timestamps: false
 })
 
-// var HelpRequest = db.define('HelpRequest', {
-//     description: Sequelize.STRING,
-//     closed: {
-//       type: Sequelize.BOOLEAN,
-//       allowNull: false,
-//       defaultValue: false
-//     },
-//   }, {
-//     timestamps: false
-// })
+var HelpRequest = db.define('HelpRequest', {
+    description: Sequelize.STRING,
+    closed: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  }, {
+    timestamps: false
+})
 
 
 Course.belongsToMany(User, {
@@ -118,9 +118,8 @@ User.belongsToMany(Course, {
 
 User.belongsTo(Role); //should create a foreign key in the users table that refers to role
 
-
-// User.belongsTo(HelpRequest, {as: "to"});  //this is tricky business, definitely check the logic on these two.
-// HelpRequest.belongsTo(User, {as: "from"});
+HelpRequest.belongsTo(User, {as: "To"});//creates two foreign keys, each called name + Id. So, HelpRequest now has a ToId and a FromId column, both referring to the user table
+HelpRequest.belongsTo(User, {as: "From"});
 
 
 User.hasMany(Post);
@@ -150,11 +149,11 @@ Role.sync()
 .then(function() {
   return Like.sync();
 })
-/*
 .then(function(){
   return HelpRequest.sync();
-}
-*/
+})
+
+
 
 //***Prepopulate Role Table***
 //This is Raw SQL, to be run once on each dev environment, and once before deployment
