@@ -122,7 +122,6 @@ HelpRequest.belongsTo(User, {as: "To"});//creates two foreign keys, each called 
 HelpRequest.belongsTo(User, {as: "From"});
 
 
-
 User.hasMany(Post);
 Post.belongsTo(User);
 Tag.hasMany(Post);
@@ -152,7 +151,8 @@ Role.sync()
 })
 .then(function(){
   return HelpRequest.sync();
-})
+});
+
 
 
 //***Prepopulate Role Table***
