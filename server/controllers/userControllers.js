@@ -9,7 +9,7 @@ module.exports = {
       var formattedUsers = users.map(function(user) {
         return {
           id: user.id,
-          isTeacher: user.isTeacher,//change this to role
+          // isTeacher: user.isTeacher,//change this to role
           name: user.name,
           name_first: user.name_first,
           name_last: user.name_last,
@@ -33,7 +33,7 @@ module.exports = {
     .then(function(user) {
       var formattedUser = {
         id: user.id,
-        isTeacher: user.isTeacher,
+        // isTeacher: user.isTeacher,
         name: user.name,
         name_first: user.name_first,
         name_last: user.name_last,
@@ -118,7 +118,7 @@ module.exports = {
       }
     })
     .then(function(user) {
-      callback(user.isTeacher);
+      callback(user.RoleId);
       return;
     })
   }

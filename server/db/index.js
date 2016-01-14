@@ -15,11 +15,11 @@ var User = db.define('User', {
   name: Sequelize.STRING,
   name_last: Sequelize.STRING,
   name_first: Sequelize.STRING,
-  isTeacher: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
+  // isTeacher: {
+  //   type: Sequelize.BOOLEAN,
+  //   allowNull: false,
+  //   defaultValue: false
+  // },
   //comment out above column, the join to role table will be created below.
   points: {
     type: Sequelize.INTEGER,
