@@ -71,30 +71,21 @@ module.exports = {
 
   
   modUser: function(req, res){
-    var uid = req.params.id;
-    var mod = req.body.mod;
-    var that = this;
+    var body = req.body
+    console.log(body.id);
 
-    db.User.findById(uid)
+    db.User.findById(body.id)
     .then(function(user){
-      if (mod === "admin") {
-        user.update({
-          RoleId: 1
-        })
-      }else if(mod === "teacher") {
-        user.update({
-          RoleId: 2
-        })
-      }else if(mod === "student") {
-        user.update({
-          RoleId: 3
-        })
-        .then(function() {
+      user.update({
+        username: body.username,
+        name: body.name,
+        name_last: body.name_last,
+        name_first: body.name_first,
+        email: body.email,
+        RoleId: body.RoleId
+      }).then(function() {
           res.status(201).json(user);
-        })
-      }else{
-        res.sendStatus(404);
-      }
+      })
     });
   },
 
