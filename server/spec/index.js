@@ -1,3 +1,12 @@
+/*
+SPEC DATABASE SETUP
+Paste below into SQL, and user id into test question object
+
+INSERT INTO courses (name) VALUES ("test");
+INSERT INTO tags (test) VALUES ("test");
+INSERT INTO roles (username,name,name_last,name_first,isTacher,points,RoleId) VALUES ("testuser@test.com", "test", "test","test",1,1);
+*/
+
 var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
@@ -11,6 +20,16 @@ describe("Legacy - Server - REST API Routes", function() {
   var ensureAuthenticatedSpy;
   var questionId;
   var answerId;
+  //Insert test user id in id_user below
+  var testQuestion = {
+    id_user: "1",
+    text: "test post body",
+    course: "test",
+    tag: "test",
+    title: "test post title"
+  };
+
+
   before(function() {
     //important to stub before we load our app
     ensureAuthenticatedSpy = sinon.stub(oAuth, 'ensureAuth');
@@ -36,13 +55,6 @@ describe("Legacy - Server - REST API Routes", function() {
     })
     describe('POST NEW QUESTION', function() {
       it('responds with 201 (Created) and the json data for the new question', function(done) {
-        var testQuestion = {
-          text: "test post body",
-          id_user: "1",
-          course: "test1",
-          tag: "test1",
-          title: "test post title"
-        };
 
         agent
           .post('/townhall/questions')
