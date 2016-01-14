@@ -6,8 +6,12 @@ angular.module('boorishpenguin', [
   'boorish.answers',
   'boorish.auth',
   'boorish.dashboard', 
+  'boorish.admin',
+  'boorish.teacher',
+  'boorish.student',
   'ngRoute', 
-  'ui.router'
+  'ui.router', 
+  'gg.editableText'
   ])
 
 .config(function ($routeProvider, $stateProvider, $sceProvider, $urlRouterProvider) {
@@ -81,12 +85,22 @@ angular.module('boorishpenguin', [
     })
     .state('dashboard', {
       url: '/dashboard', 
-      templateUrl: 'app/users/users.html', 
-      controller: 'UsersController'
+      templateUrl: 'app/dashboard/dashboard.html', 
+      controller: 'DashboardController'
     })
-     .state('dashboard.admin', {
+    .state('dashboard.admin', {
       url: '/admin', 
-      templateUrl: 'app/users/users.html', 
-      controller: 'UsersController'
+      templateUrl: 'app/dashboard/admin/admin-dashboard.html', 
+      controller: 'AdminController'
+    })
+    .state('dashboard.teacher', {
+      url: '/teacher', 
+      templateUrl: 'app/dashboard/user/teacher.html', 
+      controller: 'TeacherController'
+    })
+    .state('dashboard.student', {
+      url: '/student', 
+      templateUrl: 'app/dashboard/user/student.html', 
+      controller: 'StudentController'
     })
 });

@@ -149,3 +149,23 @@ select {
 .dropdown-form * {
   display: inline-block;
 }
+
+.user-header {
+  width: 100px;
+}
+
+.user-row {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.user-row-item {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+}
+
+.user-row-image {
+  height: 50px;
+  width: 50px;
+}

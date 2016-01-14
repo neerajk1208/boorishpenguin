@@ -1,9 +1,13 @@
 <div ng-module='boorish.dashboard'>
-  <div ng-controller='DashboardController'>
-    <ul>
-      <!-- <li ng-repeat="user in users">
+  <div>
+    <ul ng-model='user'>
+      <li>
         <span>{{user.name}}</span>
-      </li> -->
+        <span>{{user.email}}</span>
+        <img src="{{user.image}}">
+      </li>
     </ul>
+
+    <div ui-view> </div>
   </div>
 </div>
