@@ -89,13 +89,13 @@ var Like = db.define('Like', {
     timestamps: false
 });
 
-/*
+
 var Role = db.define('Role',{
     roleName: Sequelize.STRING
   }, {
     timestamps: false
 })
-
+/*
 var HelpRequest = db.define('HelpRequest', {
     description: Sequelize.STRING,
     closed: {
@@ -115,9 +115,10 @@ User.belongsToMany(Course, {
   through: 'CourseUser'
 });
 
-/*
+
 User.belongsTo(Role); //should create a foreign key in the users table that refers to role
 
+/*
 User.belongsTo(HelpRequest, {as: to});  //this is tricky business, definitely check the logic on these two.
 HelpRequest.belongsTo(User, {as: from});
 */
@@ -133,7 +134,10 @@ Post.hasMany(Post, {as: 'Responses', foreignKey: 'QuestionId'});
 Post.belongsToMany(User, {as: 'Vote', through: 'Like'});
 User.belongsToMany(Post, {through: 'Like'});
 
-User.sync()
+Role.sync()
+.then(function(){
+  return User.sync()
+})
 .then(function() {
   return Tag.sync();
 })
@@ -145,21 +149,23 @@ User.sync()
 })
 .then(function() {
   return Like.sync();
-});
+})
 /*
-.then(function(){ //not sure if ordering is important, but if it is, then role may even need to be done first, since users is dependant on it.
-  return Role.sync();
-}
 .then(function(){
   return HelpRequest.sync();
-}*/
+}
+*/
 
 //***Prepopulate Role Table***
+//This is Raw SQL, to be run once on each dev environment, and once before deployment
 /*
-Role.create({roleName: "Administrator"})
-Role.create({roleName: "Teacher"})
-Role.create({roleName: "Student"})
+INSERT INTO roles (roleName) VALUES ("Administrator");
+INSERT INTO roles (roleName) VALUES ("Teacher");
+INSERT INTO roles (roleName) VALUES ("Student");
 */
+
+
+
 exports.User = User;
 exports.Course = Course;
 exports.Tag = Tag;
