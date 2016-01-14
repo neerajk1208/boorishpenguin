@@ -83,19 +83,15 @@ module.exports = {
     if (testing && !req.user) {
       var reqName = 'testuser@test.com'
       var qid = req.params.id;
-      return db.Post.findById(qid)
-        .then(function(question) {
-          question.destroy()
-            .then(function(id) {
-              if (id) {
-                res.sendStatus(204);
-              }
-            })
-        })
+      var mod = req.body.mod;
+
+    } else {
+      var qid = req.params.id;
+      var mod = req.body.mod;
+      var reqName = req.user.profile.emails[0].value;
+
     }
 
-    var reqName = req.user.profile.emails[0].value;
-    var qid = req.params.id;
     db.Post.findById(qid)
       .then(function(question) {
         var uid = question.UserId;
@@ -181,9 +177,18 @@ module.exports = {
 
   // TODO: add check for admin or same-user
   modQuestion: function(req, res) {
-    var qid = req.params.id;
-    var mod = req.body.mod;
-    var reqName = req.user.profile.emails[0].value;
+    var testing = req.headers.testing
+    if (testing && !req.user) {
+      var reqName = 'testuser@test.com'
+      var qid = req.params.id;
+      var mod = req.body.mod;
+
+    } else {
+      var qid = req.params.id;
+      var mod = req.body.mod;
+      var reqName = req.user.profile.emails[0].value;
+
+    }
 
     db.Post.findOne({
         where: {
