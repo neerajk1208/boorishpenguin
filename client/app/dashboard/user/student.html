@@ -1,9 +1,38 @@
-<div ng-module='boorish.admin'>
-  <div ng-controller='AdminController'>
-    <ul >
-      <li>
-        <span>Student</span>
+<div ng-module='boorish.student'>
+  <div ng-controller='StudentController'>
+    <div> Request Table </div>
+    <table>
+  <tr>
+    <th class='user-header'></th>
+    <th class='user-header'> Teacher </th>
+    <th class='user-header'> Description </th>
+    <th class='user-header'> Link </th>
+
+  </tr>
+  <tr class='user-row' ng-repeat="user in users.results">
+    <td class='user-row-item'><img class='user-row-image' src="{{ user.image }}" /></td>
+    <td class='user-row-item' editable-text="user.name_first" on-change="validate(value, user)"></td>
+    <td class='user-row-item' editable-text="user.name_last" on-change="validate(value, user)"></td>
+    <td class='user-row-item' editable-text="user.email" on-change="validate(value, user)"></td>
+    <td class='user-row-item'>{{ user.points }}</td>
+    <td class='user-row-item' editable-text="user.RoleId" on-change="validate(value, user)"></td>
+
+    
+    <!-- <form ng-show="editing" ng-submit="editing = false">
+     <label>RoleId</label>
+     <input type="text"  placeholder="Role" ng-required/>
+     <button class="btn" type="submit">Save</button>
+    </form>  -->
+  </tr>
+
+
+    </table>
+    <!-- <ul >
+      <li ng-repeat='user in users.results'>
+        <img src='{{user.image}}'>
+        <span>{{user.name}}</span>
+        <span> {{user.RoleId}} </span>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </div>
