@@ -9,6 +9,7 @@ angular.module('boorishpenguin', [
   'boorish.admin',
   'boorish.teacher',
   'boorish.student',
+  'boorish.chatroom',
   'ngRoute', 
   'ui.router', 
   'gg.editableText'
@@ -102,5 +103,10 @@ angular.module('boorishpenguin', [
       url: '/student', 
       templateUrl: 'app/dashboard/user/student.html', 
       controller: 'StudentController'
+    })
+    .state('chatroomid', {
+      url: '/chatroom/:id', 
+      templateUrl: 'app/chatroom/chatroom.html', 
+      controller: 'chatroomController'
     })
 });

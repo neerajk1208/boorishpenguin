@@ -1,21 +1,15 @@
 <div ng-module='boorish.chatroom'>
   <form>
-    <h3>Chatroom</h3>
+    <h3>CHAT ROOM</h3>
     <hr>
     
     <div class="form-group">
-
-      <textarea class="form-control" type='messages' ng-model='messages' rows='10' cols='80' ng-trim="false" ></textarea>
-
-    <input class="form-control" type='question' ng-model='question.title'  size = "50" placeholder='What is your question?'>
-    </div>
-    <div class="form-group">
-      <textarea class="form-control" type='question' ng-model='message.text' rows='5' cols='80' ng-trim="false" placeholder='Add more details'></textarea>
+      <textarea class="form-control" type='question' ng-model='message' rows='5' cols='80' maxlength="255" ng-trim="false" placeholder='send a message'></textarea>
     </div>
 
 
     <div class="form-group pull-right">
-    <input class="btn btn-primary" type='submit' ng-click='submitMessage()' value='Submit'>
+      <input class="btn btn-primary" type='submit' ng-click='sendMessage()' value='Send'>
     </div>
   </form>
 </div>
