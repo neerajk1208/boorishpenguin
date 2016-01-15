@@ -3,8 +3,10 @@ var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
+var requestControllers = require ("../controllers/requestController.js")
 var oAuth = require ('../auth/googleAuth.js')
 var passport = require('passport');
+
 
 
 module.exports = function(app, express) {
@@ -21,9 +23,13 @@ module.exports = function(app, express) {
   app.delete('/townhall/answers/:id', oAuth.ensureAuth, answerControllers.deleteAnswer);
 
   app.get('/townhall/users', oAuth.ensureAuth, userControllers.allUsers);
-  app.get('/townhall/users/:id', oAuth.ensureAuth, userControllers.oneUser);
   app.post('/townhall/users', oAuth.ensureAuth, userControllers.modUser); //used to modify users to be admins.
+  app.get('/townhall/users/:id', oAuth.ensureAuth, userControllers.oneUser);
   app.get('/townhall/users/roles/:roleId', oAuth.ensureAuth, userControllers.readRole);
+  
+  app.get('/townhall/helpRequest/:idArray', oAuth.ensureAuth, requestControllers.allRequests);//allreuests will have a toggle inside of it, in the presence of a from id, it will return all the requests with that form id, otherwise it will return all reuqests with the specified toId.
+  app.post('/townhall/helpRequest', oAuth.ensureAuth, requestControllers.newRequest);//newRequest will have a toggle that checks if a userId exists for the passed in object, if it does not it will create a newUser, otherwise it will modify the specified user.
+
   app.post('/townhall/signup', userControllers.newUser);
 
   app.get('/townhall/courses', oAuth.ensureAuth, courseControllers.allCourses);
