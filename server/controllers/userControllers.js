@@ -28,7 +28,6 @@ module.exports = {
   },
 
   oneUser: function(req, res) {
-    console.log("HEREHERHERE");
     var uid = req.params.id;
     db.User.findById(uid)
     .then(function(user) {
@@ -95,9 +94,11 @@ module.exports = {
 
 
   newUser: function(user) {
-    db.User.create(user)
-    .then(function(newUser) {
-      return newUser;
+    var myUser = user
+    myUser.RoleId = 3;
+    db.User.create(myUser)
+    .then(function(myUser){
+      return myUser;
     });
   },
 
