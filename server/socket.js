@@ -20,7 +20,7 @@ module.exports = function(socket) {
 
   // when the client emits 'enter', this listens and executes
   socket.on('enter', function(user) {
-    console.log('user entered room:' + suser.room);
+    console.log('user entered room:' + user.room);
     socket.username = user.username;
     socket.join(user.room);
 

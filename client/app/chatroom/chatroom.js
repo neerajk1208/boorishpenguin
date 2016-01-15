@@ -7,16 +7,15 @@ angular.module('boorish.chatroom', [])
     $scope.user = Auth.getUser();
 
     console.dir($scope.user);
+    $scope.messages = [];
+    $scope.message = '';
+    $scope.roomId = $stateParams.id;
+    $scope.roomName = 'room-' + $scope.roomId;
 
     socket.emit('enter', {
       user: $scope.user.username,
       room: $scope.roomName
     });
-
-    $scope.messages = [];
-    $scope.message = '';
-    $scope.roomId = $stateParams.id;
-    $scope.roomName = 'room-' + $scope.roomId;
 
     socket.on('message', function(message) {
       console.log('client get message');
