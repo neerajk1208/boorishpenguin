@@ -260,7 +260,7 @@ angular.module('boorish.services', [])
     getAll: function(idArray) {
       return $http({
         method: 'GET',
-        url: '/townhall/helpRequest/' + idArray
+        url: '/townhall/helpRequest/' + JSON.stringify(idArray)
 
       })
       .then(function(res) {
