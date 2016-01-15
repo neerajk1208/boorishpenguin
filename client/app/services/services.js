@@ -312,5 +312,4 @@ angular.module('boorish.services', [])
     }
 
   };
-})
 });

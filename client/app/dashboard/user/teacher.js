@@ -3,7 +3,7 @@ angular.module('boorish.teacher', [])
 .controller('TeacherController', function($scope, $location, Auth, Users, Requests) {
 
   //reference the Requests factory in the controller as a dependency
-  Auth.setUser();
+  // Auth.setUser();
 
   $scope.description
   $scope.ToId;
