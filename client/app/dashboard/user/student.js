@@ -1,6 +1,6 @@
 angular.module('boorish.student', [])
 
-.controller('StudentController', function($scope, $location, Auth, Users) {
+.controller('StudentController', function($scope, $location, Auth, Users, Requests) {
 
 //Reference the Requests factory in the controller as a dependency
 
@@ -66,13 +66,15 @@ angular.module('boorish.student', [])
     Users.getUserWithId()
       .then(function(results) {
         console.log('I am now in here');
+        console.log("These are the results HERE", results);
         if (results.RoleId === 2) {
           arrayId = [0, results.id];
-        } else if (results.RoleId === 1) {
+        } else if (results.RoleId === 3) {
           arrayId = [1, results.id];
         }
         Requests.getAll(arrayId)
           .then(function(requests) {
+            console.log("my requests!", requests);
             console.log('Got the corresponding requests');
             $scope.requests = requests;
           })
@@ -85,7 +87,7 @@ angular.module('boorish.student', [])
     $location.path('/signin')
       // else show questions
   } else {
-    // $scope.getRequests();
+     $scope.getRequests();
     console.log("I'm here");
   }
 

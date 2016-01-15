@@ -251,4 +251,22 @@ angular.module('boorish.services', [])
   }
 }
 
-});
+})
+
+.factory('Requests', function($http) {
+  
+  return {
+
+    getAll: function(idArray) {
+      return $http({
+        method: 'GET',
+        url: '/townhall/helpRequest/' + idArray
+
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    }
+
+  };
+})
