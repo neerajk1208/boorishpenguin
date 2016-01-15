@@ -53,7 +53,7 @@ module.exports = {
     if(!req.body.id){
       return db.HelpRequest.create(req.body)
       .then(function(newRequest) {
-        res.send(newRequest);
+        res.status(201).send(newRequest);
       })
     }
     var id = req.body.id;

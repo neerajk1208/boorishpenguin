@@ -21,8 +21,10 @@ describe("Legacy - Server - REST API Routes", function() {
   var questionId;
   var answerId;
   //Insert test user id in id_user below
+  var testUserId = 1;
+
   var testQuestion = {
-    id_user: "1",
+    id_user: testUserId,
     text: "test post body",
     course: "test",
     tag: "test",
@@ -45,7 +47,7 @@ describe("Legacy - Server - REST API Routes", function() {
 
 
 
-  describe('Questions and Answers', function() {
+  describe('QUESTION AND ANSWER ROUTES', function() {
     describe('GET ALL POSTS', function() {
       it('responds with a 200 (OK) and the json data for all questions', function(done) {
         agent
@@ -53,7 +55,7 @@ describe("Legacy - Server - REST API Routes", function() {
           .expect(200, done);
       })
     })
-    describe('POST NEW QUESTION', function() {
+    describe('Post New Question', function() {
       it('responds with 201 (Created) and the json data for the new question', function(done) {
 
         agent
@@ -68,17 +70,32 @@ describe("Legacy - Server - REST API Routes", function() {
 
       })
     })
-    describe('GET QUESTION BY ID', function() {
+    describe('Get Question By ID', function() {
       it('responds with a 200 (OK) and the json data for the question', function(done) {
         agent
           .get('/townhall/questions/' + questionId)
+          .expect(function(res) {
+            expect(res.body.results[0]).to.contain({
+              text: 'test post body',
+              isAnAnswer: false,
+              points: 0,
+              responses: 0,
+              isAnswered: false,
+              isGood: false,
+              isClosed: false,
+              coursename: 'test',
+              tagname: 'test',
+              user: 'test',
+              userid: 1,
+            })
+          })
           .expect(200, done);
       })
     })
-    describe('MOD EXISTING QUESTION', function() {
+    describe('Mod Existing Question', function() {
       it('responds with 201 (Created) and the json data for the modded question', function(done) {
         var testMod = {
-          mod: "good"
+          mod: "like"
         }
 
         agent
@@ -95,11 +112,13 @@ describe("Legacy - Server - REST API Routes", function() {
 
       })
     })
-    describe('POST NEW ANSWER', function() {
+    describe('Post New Answer', function() {
       it('responds with 201 (Created) and the json data for the new answer', function(done) {
         var testAnswer = {
           id_question: questionId,
-          id_user: {id: 1},
+          id_user: {
+            id: 1
+          },
           text: "testAnswer"
         };
         agent
@@ -113,10 +132,10 @@ describe("Legacy - Server - REST API Routes", function() {
       })
     })
 
-    describe('MOD EXISTING ANSWER', function() {
+    describe('Mod Existing Answer', function() {
       it('responds with 201 (Created) and the json data for the modded answer', function(done) {
         var testMod = {
-          mod: "good"
+          mod: "like"
         }
 
         agent
@@ -131,7 +150,7 @@ describe("Legacy - Server - REST API Routes", function() {
           .expect(201, done);
       })
     })
-    describe('DELETE QUESTION', function() {
+    describe('Delete Question', function() {
       it('responds with 204 (Removed) for successfully finding and deleting question', function(done) {
         agent
           .delete('/townhall/questions/' + questionId)
@@ -143,7 +162,7 @@ describe("Legacy - Server - REST API Routes", function() {
 
       })
     })
-    describe('DELETE ANSWER', function() {
+    describe('Delete Answer', function() {
       it('responds with 204 (Removed) for successfully finding and deleting answer', function(done) {
         agent
           .delete('/townhall/answers/' + answerId)
@@ -154,4 +173,98 @@ describe("Legacy - Server - REST API Routes", function() {
       })
     })
   })
+
+  describe('USER ROUTES', function() {
+    var testUserChange = {
+      //insert test change here
+      id: 1,
+      username: "testuser@test.com",
+      name: "test",
+      name_last: "test",
+      name_first: "test",
+      email: null,
+      RoleId: 3
+
+    }
+
+    describe('Get All Users', function() {
+      it('responds with a 200 (OK) and the json data for all users', function(done) {
+        agent
+          .get('/townhall/users')
+          .expect(200, done);
+      })
+    })
+
+    describe('Mod Existing User', function() {
+      it('responds with 201 (Created) and the json data for the modded user', function(done) {
+        agent
+          .post('/townhall/users')
+          .send(testUserChange)
+          .expect(function(res) {
+            expect(res.body).to.exist;
+          })
+          .expect(201, done);
+      })
+    })
+    describe('Get One User', function() {
+      it('responds with 200 (OK) and the json data for the user', function(done) {
+        agent
+          .get('/townhall/users/' + testUserId)
+          .expect(function(res) {
+            expect(res.body.results).to.contain({
+              name: "test"
+            })
+          })
+          .expect(200, done);
+      })
+    })
+    describe('Get Users By Role', function() {
+      it('responds with 200 (OK) and the json data for users according to role', function(done) {
+        agent
+          .get('/townhall/users/roles/' + 3)
+          .expect(function(res) {
+            expect(res.body.results[0]).to.contain({
+              RoleId: 3
+            })
+          })
+          .expect(200, done);
+      })
+    })
+  })
+  describe('HELP REQUEST ROUTES', function() {
+    var testRequest = {
+      //insert test change here
+      description : "test description",
+      ToId : 1,
+      FromId : 1
+    }
+
+    describe('Post New Request', function() {
+      it('responds with 201 (Created) and the json data for the modded user', function(done) {
+        agent
+          .post('/townhall/helpRequest')
+          .send(testRequest)
+          .expect(function(res) {
+            expect(res.body).to.exist;
+          })
+          .expect(201, done);
+      })
+    })
+
+    describe('Get All Requests', function() {
+      it('responds with a 200 (OK) and the json data for all users', function(done) {
+        agent
+          .get('/townhall/helpRequest/' + '[1,1]')
+          .expect(function(res) {
+            console.log(res.body.results[0])
+            expect(res.body.results[0]).to.contain({
+              description : "test description"
+            });
+          })
+          .expect(200, done);
+      })
+    })
+  })
+
+
 })
