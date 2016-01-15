@@ -234,13 +234,21 @@ describe("Legacy - Server - REST API Routes", function() {
   describe('HELP REQUEST ROUTES', function() {
     var testRequest = {
       //insert test change here
-      description : "test description",
-      ToId : 1,
-      FromId : 1
+      description: "test description",
+      ToId: 1,
+      FromId: 1
+    }
+
+    var modRequest = {
+      //insert test change here
+      description: "updated description",
+      ToId: 1,
+      FromId: 1,
+      closed: true
     }
 
     describe('Post New Request', function() {
-      it('responds with 201 (Created) and the json data for the modded user', function(done) {
+      it('responds with 201 (Created) and the json data for the new request', function(done) {
         agent
           .post('/townhall/helpRequest')
           .send(testRequest)
@@ -252,15 +260,31 @@ describe("Legacy - Server - REST API Routes", function() {
     })
 
     describe('Get All Requests', function() {
-      it('responds with a 200 (OK) and the json data for all users', function(done) {
+      it('responds with a 200 (OK) and the json data for all requests', function(done) {
         agent
           .get('/townhall/helpRequest/' + '[1,1]')
           .expect(function(res) {
-            expect(res.body.results[0]).to.contain({
-              description : "test description"
+            expect(res.body.results[res.body.results.length - 1]).to.contain({
+              description: "test description"
             });
+            modRequest.id = res.body.results[res.body.results.length - 1].id
           })
           .expect(200, done);
+      })
+    })
+
+    describe('Mod Existing Request', function() {
+      it('responds with 201 (Created) and the json data for the modded request', function(done) {
+        agent
+          .post('/townhall/helpRequest')
+          .send(modRequest)
+          .expect(function(res) {
+            expect(res.body).to.contain({
+              description: "updated description",
+              closed : true
+            })
+          })
+          .expect(201, done);
       })
     })
   })
