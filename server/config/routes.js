@@ -23,6 +23,7 @@ module.exports = function(app, express) {
   app.delete('/townhall/answers/:id', oAuth.ensureAuth, answerControllers.deleteAnswer);
 
   app.get('/townhall/users', oAuth.ensureAuth, userControllers.allUsers);
+
   app.post('/townhall/users', oAuth.ensureAuth, userControllers.modUser); //used to modify users to be admins.
   app.get('/townhall/users/:id', oAuth.ensureAuth, userControllers.oneUser);
   app.get('/townhall/users/roles/:roleId', oAuth.ensureAuth, userControllers.readRole);

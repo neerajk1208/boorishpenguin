@@ -61,7 +61,8 @@ module.exports = {
         return {
           id: user.id,
           name: user.name,
-          email: user.email
+          email: user.email,
+          RoleId : user.RoleId
         }
       });
 
@@ -74,11 +75,9 @@ module.exports = {
   
   modUser: function(req, res){
     var body = req.body
-    console.log(body.id);
 
     db.User.findById(body.id)
     .then(function(user){
-      console.log("Check it out", body)
       user.update({
         username: body.username,
         name: body.name,

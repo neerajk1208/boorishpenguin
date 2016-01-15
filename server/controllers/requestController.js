@@ -53,13 +53,12 @@ module.exports = {
     if(!req.body.id){
       return db.HelpRequest.create(req.body)
       .then(function(newRequest) {
-        res.send(newRequest);
+        res.status(201).send(newRequest);
       })
     }
     var id = req.body.id;
     db.HelpRequest.findById(id)
     .then(function(request){
-      console.log(request.description)
       request.update({
         description: req.body.description,
         closed: req.body.closed
