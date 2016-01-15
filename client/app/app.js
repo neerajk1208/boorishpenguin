@@ -12,7 +12,8 @@ angular.module('boorishpenguin', [
   'boorish.chatroom',
   'ngRoute', 
   'ui.router', 
-  'gg.editableText'
+  'gg.editableText', 
+  'boorish.main'
   ])
 
 .config(function ($routeProvider, $stateProvider, $sceProvider, $urlRouterProvider) {

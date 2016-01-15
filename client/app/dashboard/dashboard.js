@@ -11,6 +11,8 @@ angular.module('boorish.dashboard', [])
     RoleId: ''
   };
 
+  $scope.currentUser = JSON.parse(window.localStorage.getItem('com.boorish.user'));
+
   $scope.getUserInfo = function() {
     //call getuserbyID service function
     Users.getUserWithId()
