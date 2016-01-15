@@ -7,8 +7,17 @@ var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var apikeys = require('./config/apikeys.js');
 var controllers = require('./controllers/userControllers.js');
+
+
 var app = express();
 // var port = process.env.PORT || 8001;
+
+// Hook Socket.io into Express
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+//require socket.io module
+var socket = require('./socket.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -22,8 +31,10 @@ require('./config/routes.js')(app, express);
 app.set("port", process.env.PORT || 8001);
 
 
+io.sockets.on('connection', socket);
+
 if (!module.parent) {
-  app.listen(app.get("port"));
+  http.listen(app.get("port"));
   console.log("Listening on", app.get("port"));
 }
 
