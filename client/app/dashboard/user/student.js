@@ -5,6 +5,16 @@ angular.module('boorish.student', [])
 //Reference the Requests factory in the controller as a dependency
 
   Auth.setUser();
+  $scope.description
+  $scope.ToId;
+  $scope.currentUser;
+
+  $scope.sampleRequest = {
+      FromId: 2,
+      ToId: 1,
+      closed: 0, 
+      description: "hello testing" 
+    }
 
   $scope.requests = {
     results: [
@@ -67,6 +77,7 @@ angular.module('boorish.student', [])
       .then(function(results) {
         console.log('I am now in here');
         console.log("These are the results HERE", results);
+        $scope.currentUser = results.id;
         if (results.RoleId === 2) {
           arrayId = [0, results.id];
         } else if (results.RoleId === 3) {
@@ -82,13 +93,30 @@ angular.module('boorish.student', [])
       })
   };
 
+  $scope.addRequest = function() {
+    console.log("here is the teacher", $scope.ToId);
+    console.log("here is the description", $scope.description);
+    var request = { 
+      description: $scope.description, 
+      closed: 0, 
+      ToId: $scope.ToId, 
+      FromId: $scope.currentUser
+    };
+    console.log("here is the request I'm sending", request);
+    Requests.newRequest(request)
+      .then(function(results) {
+        $scope.getRequests();
+      })
+  }
+
   // if user is not authenticated, reroute to /signin
   if (!Auth.isAuth()) {
     $location.path('/signin')
       // else show questions
   } else {
-     $scope.getRequests();
+     // $scope.getRequests();
     console.log("I'm here");
+    $scope.getRequests();
   }
 
 

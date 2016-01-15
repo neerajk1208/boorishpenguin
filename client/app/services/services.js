@@ -266,6 +266,17 @@ angular.module('boorish.services', [])
       .then(function(res) {
         return res.data;
       });
+    }, 
+
+    newRequest: function(request) {
+      return $http({
+        method: 'POST', 
+        url: '/townhall/helpRequest/', 
+        data: request
+      })
+      .then(function(res) {
+        return res.data;
+      })
     }
 
   };

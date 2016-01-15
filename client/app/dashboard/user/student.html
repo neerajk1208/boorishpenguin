@@ -4,16 +4,16 @@
     <div> Create a help request! </div>
 
 
-    <form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+    <form id="contact_form" ng-submit="addRequest()" enctype="multipart/form-data">
   <div class="row">
     <label for="name">Which teacher would you like to ask help from?</label><br />
-    <input id="name" class="input" name="name" type="text" value="" size="30" /><br />
+    <input ng-model="ToId" id="name" class="input" name="name" type="text" value="" size="30" /><br />
   </div>
   <div class="row">
     <label for="message">Please explain your topic of concern!</label><br />
-    <textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
+    <textarea ng-model="description" id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
   </div>
-  <input id="submit_button" type="submit" value="Send email" />
+  <input id="submit_button" type="submit" value="Submit" />
 </form>         
 
 
