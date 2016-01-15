@@ -23,7 +23,7 @@ module.exports = {
         });
 
         requests = {};
-        requests.results = formattedRequest
+        requests.results = formattedRequest;
         res.json(requests);
       })
     }else{
@@ -43,7 +43,7 @@ module.exports = {
         });
 
         requests = {};
-        requests.results = formattedRequest
+        requests.results = formattedRequest;
         res.json(requests);
       })
     }
