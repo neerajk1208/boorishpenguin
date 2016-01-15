@@ -1,9 +1,20 @@
 angular.module('boorish.teacher', [])
 
-.controller('TeacherController', function($scope, $location, Auth, Users) {
+.controller('TeacherController', function($scope, $location, Auth, Users, Requests) {
 
   //reference the Requests factory in the controller as a dependency
   Auth.setUser();
+
+  $scope.description
+  $scope.ToId;
+  $scope.currentUser;
+
+$scope.sampleRequest = {
+      FromId: 2,
+      ToId: 1,
+      closed: 0, 
+      description: "hello testing" 
+    }
 
   $scope.requests = {
     results: [
@@ -32,6 +43,17 @@ angular.module('boorish.teacher', [])
   };
 
   /*
+
+  We should include a section to create help requests here. 
+
+  Teacher's name field
+  Description
+  Submit
+    On submit, the request should be added to the database, so we need a function to add to the database
+      1. addRequest
+        2. link to service function
+          3. update add to the first request
+  
   Here we should store request details in an object, and ng-repeat through each of the requests. In order to do this, we need the following: 
 
   1) $scope.requests = [];
@@ -45,23 +67,40 @@ angular.module('boorish.teacher', [])
 
   $scope.getRequests = function() {
     //call getuserbyID service function
-    //call the requests factory getAll function
-    Requests.getAll()
+
+    //grab current userId
+    //grab role of current user
+    //create arrayid based on above-mentioned results
+    var arrayId = [];
+
+    Users.getUserWithId()
       .then(function(results) {
-        console.log("These are my results", results);
-        $scope.requests = results;
+        console.log('I am now in here');
+        console.log("These are the results HERE", results);
+        $scope.currentUser = results.id;
+        if (results.RoleId === 2) {
+          arrayId = [0, results.id];
+        } else if (results.RoleId === 3) {
+          arrayId = [1, results.id];
+        }
+        Requests.getAll(arrayId)
+          .then(function(requests) {
+            console.log("my requests!", requests);
+            console.log('Got the corresponding requests');
+            $scope.requests = requests;
+          })
+
       })
   };
 
-  // if user is not authenticated, reroute to /signin
   if (!Auth.isAuth()) {
     $location.path('/signin')
       // else show questions
   } else {
-    $scope.getUsers();
+     // $scope.getRequests();
     console.log("I'm here");
+    $scope.getRequests();
   }
-
 
 });
 

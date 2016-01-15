@@ -1,6 +1,6 @@
 <div ng-module='boorish.teacher'>
   <div ng-controller='TeacherController'>
-    <div> Request Table </div>
+     <div> Request Table </div>
     <table>
   <tr>
     <th class='user-header'> Student </th>
@@ -9,7 +9,7 @@
 
   </tr>
   <tr class='user-row' ng-repeat="request in requests.results">
-    <td class='user-row-item' editable-text="request.ToId"></td>
+    <td class='user-row-item' editable-text="request.FromId"></td>
     <td class='user-row-item' editable-text="request.description"></td>
     <td class='user-row-item' editable-text="request.email" ></td>
     <td class='user-row-item'>http://www.google.com</td>
@@ -21,9 +21,6 @@
      <button class="btn" type="submit">Save</button>
     </form>  -->
   </tr>
-
-
-    </table>
     <!-- <ul >
       <li ng-repeat='user in users.results'>
         <img src='{{user.image}}'>
