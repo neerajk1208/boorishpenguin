@@ -5,15 +5,17 @@
 
 
     <form id="contact_form" ng-submit="addRequest()" enctype="multipart/form-data">
-  <div class="row">
+  <div class="row form-group">
     <label for="name">Which teacher would you like to ask help from?</label><br />
     <input ng-model="ToId" id="name" class="input" name="name" type="text" value="" size="30" /><br />
   </div>
-  <div class="row">
+  <div class="row form-group">
     <label for="message">Please explain your topic of concern!</label><br />
-    <textarea ng-model="description" id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
+    <textarea ng-model="description" id="message" class="input form-control" name="message" rows="7" cols="30"></textarea><br />
   </div>
-  <input id="submit_button" type="submit" value="Submit" />
+  <div class="form-group pull-right">
+    <input class="btn btn-primary" id="submit_button" type="submit" value="Submit" />
+  </div>
 </form>         
 
 
@@ -30,7 +32,7 @@
     <td class='user-row-item' editable-text="request.ToId"></td>
     <td class='user-row-item' editable-text="request.description"></td>
     <td class='user-row-item' editable-text="request.email" ></td>
-    <td class='user-row-item'>http://www.google.com</td>
+    <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> Chat Link </a></td>
 
     
     <!-- <form ng-show="editing" ng-submit="editing = false">
