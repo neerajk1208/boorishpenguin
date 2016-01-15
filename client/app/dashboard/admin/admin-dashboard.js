@@ -2,7 +2,7 @@ angular.module('boorish.admin', [])
 
 .controller('AdminController', function($scope, $location, Auth, Users) {
 
-  Auth.setUser();
+  // Auth.setUser();
   $scope.users;
 
   $scope.validate = function(value, user, prop) {
@@ -26,10 +26,6 @@ angular.module('boorish.admin', [])
         $scope.users = results;
         console.log($scope.users.results)
       })
-  };
-
-  $scope.getTemplate = function() {
-    console.log()
   };
 
   // if user is not authenticated, reroute to /signin

@@ -4,7 +4,7 @@ angular.module('boorish.student', [])
 
 //Reference the Requests factory in the controller as a dependency
 
-  Auth.setUser();
+  // Auth.setUser();
   $scope.description
   $scope.ToId;
   $scope.currentUser;

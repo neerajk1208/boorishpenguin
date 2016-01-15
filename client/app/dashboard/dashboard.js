@@ -2,7 +2,7 @@ angular.module('boorish.dashboard', [])
 
 .controller('DashboardController', function($scope, $location, Auth, Users) {
 
-  Auth.setUser();
+  // Auth.setUser();
 
   $scope.user = {
     name: '',
