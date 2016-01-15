@@ -1,10 +1,46 @@
 angular.module('boorish.student', [])
 
-.controller('StudentController', function($scope, $location, Auth, Users) {
+.controller('StudentController', function($scope, $location, Auth, Users, Requests) {
+
+//Reference the Requests factory in the controller as a dependency
 
   Auth.setUser();
+  $scope.description
+  $scope.ToId;
+  $scope.currentUser;
 
-  $scope.requests;
+  $scope.sampleRequest = {
+      FromId: 2,
+      ToId: 1,
+      closed: 0, 
+      description: "hello testing" 
+    }
+
+  $scope.requests = {
+    results: [
+      {
+        id: 1, 
+        description: 'I need help with this math problem', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }, 
+      {
+        id: 2, 
+        description: 'What do you do now?', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }, 
+      {
+        id: 3, 
+        description: 'Whaaaat!', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }
+    ]
+  };
 
   /*
 
@@ -29,22 +65,81 @@ angular.module('boorish.student', [])
 
   */
 
-  $scope.getUsers = function() {
+  $scope.getRequests = function() {
     //call getuserbyID service function
-    Users.allUsers()
+
+    //grab current userId
+    //grab role of current user
+    //create arrayid based on above-mentioned results
+    var arrayId = [];
+
+    Users.getUserWithId()
       .then(function(results) {
-        console.log(results);
+        console.log('I am now in here');
+        console.log("These are the results HERE", results);
+        $scope.currentUser = results.id;
+        if (results.RoleId === 2) {
+          arrayId = [0, results.id];
+        } else if (results.RoleId === 3) {
+          arrayId = [1, results.id];
+        }
+        Requests.getAll(arrayId)
+          .then(function(requests) {
+            console.log("my requests!", requests);
+            console.log('Got the corresponding requests');
+            $scope.requests = requests;
+          })
+
       })
   };
+
+  $scope.addRequest = function() {
+    console.log("here is the teacher", $scope.ToId);
+    console.log("here is the description", $scope.description);
+    var request = { 
+      description: $scope.description, 
+      closed: 0, 
+      ToId: $scope.ToId, 
+      FromId: $scope.currentUser
+    };
+    console.log("here is the request I'm sending", request);
+    Requests.newRequest(request)
+      .then(function(results) {
+        $scope.getRequests();
+      })
+  }
 
   // if user is not authenticated, reroute to /signin
   if (!Auth.isAuth()) {
     $location.path('/signin')
       // else show questions
   } else {
-    $scope.getUsers();
+     // $scope.getRequests();
     console.log("I'm here");
+    $scope.getRequests();
   }
 
 
 });
+
+/*
+
+.factory('Requests', function($http) {
+  
+  return {
+
+    getAll: function(idArray) {
+      return $http({
+        method: 'GET',
+        url: '/townhall/helpRequest/' + idArray
+
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    }
+
+  };
+})
+
+*/

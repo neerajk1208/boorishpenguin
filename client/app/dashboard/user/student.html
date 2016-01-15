@@ -1,20 +1,36 @@
 <div ng-module='boorish.student'>
   <div ng-controller='StudentController'>
+
+    <div> Create a help request! </div>
+
+
+    <form id="contact_form" ng-submit="addRequest()" enctype="multipart/form-data">
+  <div class="row">
+    <label for="name">Which teacher would you like to ask help from?</label><br />
+    <input ng-model="ToId" id="name" class="input" name="name" type="text" value="" size="30" /><br />
+  </div>
+  <div class="row">
+    <label for="message">Please explain your topic of concern!</label><br />
+    <textarea ng-model="description" id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
+  </div>
+  <input id="submit_button" type="submit" value="Submit" />
+</form>         
+
+
+
     <div> Request Table </div>
     <table>
   <tr>
-    <th class='user-header'></th>
     <th class='user-header'> Teacher </th>
     <th class='user-header'> Description </th>
     <th class='user-header'> Link </th>
 
   </tr>
-  <tr class='user-row' ng-repeat="request in request.results">
-    <td class='user-row-item' editable-text="request.name_first"></td>
-    <td class='user-row-item' editable-text="request.name_last"></td>
+  <tr class='user-row' ng-repeat="request in requests.results">
+    <td class='user-row-item' editable-text="request.ToId"></td>
+    <td class='user-row-item' editable-text="request.description"></td>
     <td class='user-row-item' editable-text="request.email" ></td>
-    <td class='user-row-item'>{{ request.points }}</td>
-    <td class='user-row-item' editable-text="request.RoleId"></td>
+    <td class='user-row-item'>http://www.google.com</td>
 
     
     <!-- <form ng-show="editing" ng-submit="editing = false">

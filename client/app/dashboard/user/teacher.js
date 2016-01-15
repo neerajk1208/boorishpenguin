@@ -2,9 +2,34 @@ angular.module('boorish.teacher', [])
 
 .controller('TeacherController', function($scope, $location, Auth, Users) {
 
+  //reference the Requests factory in the controller as a dependency
   Auth.setUser();
 
-  $scope = users = [];
+  $scope.requests = {
+    results: [
+      {
+        id: 1, 
+        description: 'I need help with this math problem', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }, 
+      {
+        id: 2, 
+        description: 'What do you do now?', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }, 
+      {
+        id: 3, 
+        description: 'Whaaaat!', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }
+    ]
+  };
 
   /*
   Here we should store request details in an object, and ng-repeat through each of the requests. In order to do this, we need the following: 
@@ -18,11 +43,13 @@ angular.module('boorish.teacher', [])
 
   */
 
-  $scope.getUsers = function() {
+  $scope.getRequests = function() {
     //call getuserbyID service function
-    Users.allUsers()
+    //call the requests factory getAll function
+    Requests.getAll()
       .then(function(results) {
-        console.log(results);
+        console.log("These are my results", results);
+        $scope.requests = results;
       })
   };
 
@@ -37,3 +64,9 @@ angular.module('boorish.teacher', [])
 
 
 });
+
+
+
+
+
+
