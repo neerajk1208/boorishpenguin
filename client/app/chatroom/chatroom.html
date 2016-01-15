@@ -1,0 +1,20 @@
+<div ng-module='boorish.chatroom'>
+  <form>
+    <h3>CHAT ROOM</h3>
+    <hr>
+    
+
+    <div ng-repeat='message in messages' class='chat-item'> 
+      <span ><image class='chat-photo' ng-src="{{ message.image }}" /></span><span class='chat-message'> {{ message.message }} </span>
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control" type='question' ng-model='message' rows='5' cols='80' maxlength="255" ng-trim="false" placeholder='send a message'></textarea>
+    </div>
+
+
+    <div class="form-group pull-right">
+      <input class="btn btn-primary" type='submit' ng-click='sendMessage()' value='Send'>
+    </div>
+  </form>
+</div>

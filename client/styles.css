@@ -165,7 +165,26 @@ select {
   padding-bottom: 10px;
 }
 
+.chat-item {
+  padding-bottom: 10px;
+}
+
+.chat-photo {
+  border-radius: 20px;
+  width:35px;
+  margin-right: 10px;
+}
+
 .user-row-image {
   height: 50px;
   width: 50px;
+}
+
+.chat-user {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.chat-message {
+  font-size: 12px;
 }
