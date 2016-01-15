@@ -59,7 +59,6 @@ module.exports = {
     var id = req.body.id;
     db.HelpRequest.findById(id)
     .then(function(request){
-      console.log(request.description)
       request.update({
         description: req.body.description,
         closed: req.body.closed

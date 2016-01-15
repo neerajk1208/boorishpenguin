@@ -256,7 +256,6 @@ describe("Legacy - Server - REST API Routes", function() {
         agent
           .get('/townhall/helpRequest/' + '[1,1]')
           .expect(function(res) {
-            console.log(res.body.results[0])
             expect(res.body.results[0]).to.contain({
               description : "test description"
             });
