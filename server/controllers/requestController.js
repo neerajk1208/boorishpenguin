@@ -2,9 +2,9 @@ var db = require('../db/index.js');
 
 module.exports = {
   allRequests: function(req, res) {
-    // console.log("REQPARAMS: " + req.params.idArray)
-    var isFromId = req.params.idArray[0];
-    var id = req.params.idArray[1];
+    var parsedReq = JSON.parse(req.params.idArray)
+    var isFromId = parsedReq[0];
+    var id = parsedReq[1];
 
     if(isFromId){
       db.HelpRequest.findAll({
