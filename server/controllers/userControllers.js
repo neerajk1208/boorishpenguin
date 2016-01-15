@@ -28,7 +28,6 @@ module.exports = {
   },
 
   oneUser: function(req, res) {
-    console.log("HEREHERHERE");
     var uid = req.params.id;
     db.User.findById(uid)
     .then(function(user) {

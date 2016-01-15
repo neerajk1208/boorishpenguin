@@ -11,8 +11,8 @@ module.exports = {
         where: {
           FromId: id
         }
-      }).then(function(helpReqeusts) {
-        var formattedRequest = helpReqeusts.map(function(request) {
+      }).then(function(helpRequests) {
+        var formattedRequest = helpRequests.map(function(request) {
           return {
             id: request.id,
             description: request.description,
@@ -31,8 +31,8 @@ module.exports = {
         where: {
           ToId: id
         }
-      }).then(function(helpReqeusts) {
-        var formattedRequest = helpReqeusts.map(function(request) {
+      }).then(function(helpRequests) {
+        var formattedRequest = helpRequests.map(function(request) {
           return {
             id: request.id,
             description: request.description,
@@ -51,14 +51,12 @@ module.exports = {
 
   newRequest: function(req, res) {
     if(!req.body.id){
-      console.log("making a new request");
       return db.HelpRequest.create(req.body)
       .then(function(newRequest) {
         res.send(newRequest);
       })
     }
     var id = req.body.id;
-    console.log("about to update old request");
     db.HelpRequest.findById(id)
     .then(function(request){
       console.log(request.description)
