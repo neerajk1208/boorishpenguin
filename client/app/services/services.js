@@ -230,10 +230,12 @@ angular.module('boorish.services', [])
             if (users[i].email === user.google) {
               isUser = true;
               user.id = users[i].id;
+              user = users[i];
             }
           }
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
+            $window.localStorage.setItem('com.boorish.user', JSON.stringify(user));
           } else {
             $location.path('/signin');
           }
@@ -248,13 +250,19 @@ angular.module('boorish.services', [])
   signout: function () {
     $window.localStorage.removeItem('com.boorish');
     $location.path('/signin');
+  },
+
+  getUser: function() {
+    return JSON.parse($window.localStorage.getItem('com.boorish.user'));
   }
 }
 })
 
 .factory('socket', function ($rootScope) {
   var socket = io.connect();
+
   return {
+
     on: function (eventName, callback) {
       socket.on(eventName, function () {  
         var args = arguments;
@@ -263,6 +271,7 @@ angular.module('boorish.services', [])
         });
       });
     },
+    
     emit: function (eventName, data, callback) {
       socket.emit(eventName, data, function () {
         var args = arguments;
@@ -273,6 +282,7 @@ angular.module('boorish.services', [])
         });
       })
     }
+  
   };
 })
 .factory('Requests', function($http) {

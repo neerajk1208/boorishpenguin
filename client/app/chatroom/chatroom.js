@@ -1,34 +1,39 @@
 angular.module('boorish.chatroom', [])
 
 .controller('chatroomController', function($scope, $location, socket, Auth, $stateParams) {
+  // if user is not authenticated, reroute to /signin
+  $scope.init = function() {
+    //emit socket user connect event here
+    $scope.user = Auth.getUser();
 
-  $scope.messages = [];
-  $scope.message = {};
+    console.dir($scope.user);
 
-  $scope.roomId = $stateParams.id;
-  var roomName = 'room-' + $scope.roomId;
+    socket.emit('enter', {
+      user: $scope.user.username,
+      room: $scope.roomName
+    });
 
-  // socket.on('init', function (data) {
-  //   $scope.name = data;
-  //   $scope.users = [];
-  // });
+    $scope.messages = [];
+    $scope.message = '';
+    $scope.roomId = $stateParams.id;
+    $scope.roomName = 'room-' + $scope.roomId;
 
-  //need chatroom id
-  
-  socket.on('message', function(message) {
-    console.log('client get message');
-    $scope.messages.push(message);
-  });
+    socket.on('message', function(message) {
+      console.log('client get message');
+      $scope.messages.push(message);
+    });
+  };
+
 
   $scope.sendMessage = function() {
     //emit socket user connect event here
-    console.log($scope.message);
     //emit send message here from socket object
 
     var message = {
-      user: 'test-user',
-      room: roomName,
-      message: $scope.message
+      user: $scope.user.username, //user name from local storage
+      room: $scope.roomName,
+      message: $scope.message,
+      image: $scope.user.image
     };
 
     socket.emit('message', message);
@@ -36,15 +41,6 @@ angular.module('boorish.chatroom', [])
     $scope.messages.push(message);
   };
 
-  $scope.init = function() {
-    //emit socket user connect event here
-    socket.emit('enter', {
-      user: 'name',
-      room: roomName
-    });
-  };
-
-  // if user is not authenticated, reroute to /signin
   if (!Auth.isAuth()) {
     $location.path('/signin')
   } else {
