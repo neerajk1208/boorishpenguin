@@ -61,11 +61,22 @@ angular.module('boorish.student', [])
     //grab current userId
     //grab role of current user
     //create arrayid based on above-mentioned results
-    var arrayId
-    Requests.getAll(arrayId)
+    var arrayId = [];
+
+    Users.getUserWithId()
       .then(function(results) {
-        console.log("these are my results", results);
-        $scope.requests = results;
+        console.log('I am now in here');
+        if (results.RoleId === 2) {
+          arrayId = [0, results.id];
+        } else if (results.RoleId === 1) {
+          arrayId = [1, results.id];
+        }
+        Requests.getAll(arrayId)
+          .then(function(requests) {
+            console.log('Got the corresponding requests');
+            $scope.requests = requests;
+          })
+
       })
   };
 
