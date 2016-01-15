@@ -2,9 +2,35 @@ angular.module('boorish.student', [])
 
 .controller('StudentController', function($scope, $location, Auth, Users) {
 
+//Reference the Requests factory in the controller as a dependency
+
   Auth.setUser();
 
-  $scope.requests;
+  $scope.requests = {
+    results: [
+      {
+        id: 1, 
+        description: 'I need help with this math problem', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }, 
+      {
+        id: 2, 
+        description: 'What do you do now?', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }, 
+      {
+        id: 3, 
+        description: 'Whaaaat!', 
+        closed: 0, 
+        ToId: 1, 
+        FromId: 2
+      }
+    ]
+  };
 
   /*
 
@@ -29,11 +55,17 @@ angular.module('boorish.student', [])
 
   */
 
-  $scope.getUsers = function() {
+  $scope.getRequests = function() {
     //call getuserbyID service function
-    Users.allUsers()
+
+    //grab current userId
+    //grab role of current user
+    //create arrayid based on above-mentioned results
+    var arrayId
+    Requests.getAll(arrayId)
       .then(function(results) {
-        console.log(results);
+        console.log("these are my results", results);
+        $scope.requests = results;
       })
   };
 
@@ -42,9 +74,31 @@ angular.module('boorish.student', [])
     $location.path('/signin')
       // else show questions
   } else {
-    $scope.getUsers();
+    // $scope.getRequests();
     console.log("I'm here");
   }
 
 
 });
+
+/*
+
+.factory('Requests', function($http) {
+  
+  return {
+
+    getAll: function(idArray) {
+      return $http({
+        method: 'GET',
+        url: '/townhall/helpRequest/' + idArray
+
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    }
+
+  };
+})
+
+*/
