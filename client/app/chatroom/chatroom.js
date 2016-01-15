@@ -21,19 +21,20 @@ angular.module('boorish.chatroom', [])
     //emit socket user connect event here
     console.log($scope.message);
     //emit send message here from socket object
-    //
-    socket.emit('message', {
+    
+    var message = {
       user: 'test-user',
       message: $scope.message
-    });
-    
+    };
+
+    socket.emit('message', message);
+
+    $scope.messages.push(message);
   };
 
   $scope.init = function() {
     //emit socket user connect event here
-    
   };
-
 
   // if user is not authenticated, reroute to /signin
   if (!Auth.isAuth()) {
