@@ -51,10 +51,12 @@ module.exports = {
 
   readRole: function(req, res) {
     roleId = req.params.roleId;//pulls the roleId from the route
+    
     db.User.findAll({
       where: {
         RoleId: roleId
-      }
+      },
+      include: [db.Role]
     })
     .then(function(users) {
       var formattedUsers = users.map(function(user) {
@@ -62,7 +64,8 @@ module.exports = {
           id: user.id,
           name: user.name,
           email: user.email,
-          RoleId : user.RoleId
+          RoleId : user.RoleId,
+          roleName: user.Role.roleName 
         }
       });
 

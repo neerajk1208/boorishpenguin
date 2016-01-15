@@ -170,3 +170,4 @@ exports.Course = Course;
 exports.Tag = Tag;
 exports.Post = Post;
 exports.HelpRequest = HelpRequest;
+exports.Role = Role;
