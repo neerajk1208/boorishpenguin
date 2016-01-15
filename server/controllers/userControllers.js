@@ -94,14 +94,11 @@ module.exports = {
 
 
   newUser: function(user) {
-    db.User.create(user)
-    .then(function(newUser) {
-       newUser.update({
-        RoleId: 3
-      })
-    })
-    .then(function(newUser){
-      return newUser;
+    var myUser = user
+    myUser.RoleId = 3;
+    db.User.create(myUser)
+    .then(function(myUser){
+      return myUser;
     });
   },
 
