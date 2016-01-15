@@ -165,7 +165,7 @@ select {
   padding-bottom: 10px;
 }
 
-.chat-item {
+.chat-item > td {
   padding-bottom: 10px;
 }
 
@@ -180,6 +180,10 @@ select {
   width: 50px;
 }
 
+.chats {
+  width:100%;
+}
+
 .chat-user {
   font-size: 12px;
   font-weight: bold;
@@ -187,4 +191,12 @@ select {
 
 .chat-message {
   font-size: 12px;
+  width: 100%;
+}
+
+.chat-time {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 11px;
+  opacity: .7;
 }

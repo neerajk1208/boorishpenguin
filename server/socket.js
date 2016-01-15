@@ -14,7 +14,9 @@ module.exports = function(socket) {
     socket.in(data.room).broadcast.emit('message', {
       room: data.room,
       user: data.user,
-      message: data.message
+      image: data.image,
+      message: data.message,
+      time: data.time
     });
   });
 
