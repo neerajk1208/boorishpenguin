@@ -20,6 +20,12 @@
 
 <br>
 
+<select name="select">
+  <option value="value1">Value 1</option> 
+  <option value="value2" selected>Value 2</option>
+  <option value="value3">Value 3</option>
+</select>
+
     <h3> Pending Requests </h3>
     <table>
   <tr>
@@ -29,9 +35,9 @@
 
   </tr>
   <tr class='user-row' ng-repeat="request in requests.results">
-    <td class='user-row-item' editable-text="request.ToId"></td>
-    <td class='user-row-item' editable-text="request.description"></td>
-    <td class='user-row-item' editable-text="request.email" ></td>
+    <td class='user-row-item' > {{request.teacherName}}</td>
+    <td class='user-row-item' > {{request.description}}</td>
+    <td class='user-row-item'  >{{request.email}}</td>
     <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> Chat Link </a></td>
 
     

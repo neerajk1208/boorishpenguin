@@ -7,7 +7,10 @@ angular.module('boorish.student', [])
   // Auth.setUser();
   $scope.description
   $scope.ToId;
+  $scope.teacherName;
   $scope.currentUser;
+  $scope.users;
+  $scope.teachers = [];
 
   $scope.sampleRequest = {
       FromId: 2,
@@ -16,31 +19,7 @@ angular.module('boorish.student', [])
       description: "hello testing" 
     }
 
-  $scope.requests = {
-    results: [
-      {
-        id: 1, 
-        description: 'I need help with this math problem', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }, 
-      {
-        id: 2, 
-        description: 'What do you do now?', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }, 
-      {
-        id: 3, 
-        description: 'Whaaaat!', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }
-    ]
-  };
+  $scope.requests 
 
   /*
 
@@ -88,25 +67,59 @@ angular.module('boorish.student', [])
             console.log("my requests!", requests);
             console.log('Got the corresponding requests');
             $scope.requests = requests;
+            $scope.requests.results.forEach(function(request) {
+              console.log('I am in here');
+              Users.getUserWithId(request.ToId)
+                .then(function(results) {
+                  request.teacherName = results.name;
+                })
+            })
           })
 
+      })
+  };
+
+  $scope.getUsers = function() {
+    //call getuserbyID service function
+    Users.allUsers()
+      .then(function(results) {
+        //add in logic to remove current user from results
+        $scope.users = results;
+        $scope.users.results.forEach(function(user) {
+          if (user.RoleId === 2) {
+            $scope.teachers.push(user);
+          }
+        })
+        console.log("these are the teachers!", $scope.teachers)
       })
   };
 
   $scope.addRequest = function() {
     console.log("here is the teacher", $scope.ToId);
     console.log("here is the description", $scope.description);
-    var request = { 
-      description: $scope.description, 
-      closed: 0, 
-      ToId: $scope.ToId, 
-      FromId: $scope.currentUser
-    };
-    console.log("here is the request I'm sending", request);
-    Requests.newRequest(request)
-      .then(function(results) {
-        $scope.getRequests();
-      })
+    var specificTeacher;
+    $scope.teachers.forEach(function(teacher) {
+      if ($scope.ToId !== teacher.name) {
+        console.log("Sorry, that is not a valid teacher name!");
+      } else {
+        specificTeacher = teacher;  
+      }
+    })
+    if (specificTeacher) {
+
+      var request = { 
+        description: $scope.description, 
+        closed: 0, 
+        ToId: specificTeacher.id, 
+        FromId: $scope.currentUser
+      };
+      console.log("here is the request I'm sending", request);
+      Requests.newRequest(request)
+        .then(function(results) {
+          $scope.getRequests();
+        })
+      
+    }
   }
 
   // if user is not authenticated, reroute to /signin
@@ -117,6 +130,7 @@ angular.module('boorish.student', [])
      // $scope.getRequests();
     console.log("I'm here");
     $scope.getRequests();
+    $scope.getUsers();
   }
 
 
