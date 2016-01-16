@@ -1,6 +1,6 @@
 angular.module('boorish.student', [])
 
-.controller('StudentController', function($scope, $location, Auth, Users, Requests) {
+.controller('StudentController', function($scope, socket, $location, Auth, Users, Requests) {
 
 //Reference the Requests factory in the controller as a dependency
 
@@ -114,6 +114,13 @@ angular.module('boorish.student', [])
     console.log("I'm here");
     $scope.getRequests();
     $scope.getUsers();
+    socket.on('close-request', function(data) {
+      $scope.requests.results.forEach(function(request) {
+        if (request.id === data.id) {
+          request.closed = true;
+        }
+      })
+    })
   }
 
 

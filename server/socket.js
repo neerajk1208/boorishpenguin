@@ -41,6 +41,12 @@ module.exports = function(socket) {
     });
   });
 
+  socket.on('close-request', function(data) {
+    socket.broadcast.emit('close-request', {
+      id: data.id
+    });
+  });
+
   socket.on('stop typing', function() {
     socket.broadcast.emit('stop typing', {
       username: socket.username
