@@ -1,6 +1,6 @@
-# Project Name
+# Boorish Penguin
 
-> Pithy project description
+> Q&A forum for students and teachers
 
 ## Team
 
