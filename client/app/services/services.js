@@ -141,7 +141,13 @@ angular.module('boorish.services', [])
 
     // users the userID that is stored in localStorage to obtain the user from the database
     getUserWithId: function() {
-      var userID = $window.localStorage.getItem('com.boorish');
+      var userID;
+      if (arguments.length === 1) {
+        userID = arguments[0];
+      } else {
+        userID = $window.localStorage.getItem('com.boorish');
+      }
+      console.log("this is the userID", userID);
       return $http({
         method: 'GET',
         url: '/townhall/users/' + userID

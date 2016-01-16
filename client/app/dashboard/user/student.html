@@ -1,13 +1,13 @@
 <div ng-module='boorish.student'>
   <div ng-controller='StudentController'>
 
-    <div> Create a help request! </div>
+    <h3> Make a Help Request </h3>
 
 
     <form id="contact_form" ng-submit="addRequest()" enctype="multipart/form-data">
   <div class="row form-group">
-    <label for="name">Which teacher would you like to ask help from?</label><br />
-    <input ng-model="ToId" id="name" class="input" name="name" type="text" value="" size="30" /><br />
+    <label for="name">Choose a teacher: </label>  
+    <select ng-options="teacher.name for teacher in teachers" ng-model="targetTeacher"> </select>
   </div>
   <div class="row form-group">
     <label for="message">Please explain your topic of concern!</label><br />
@@ -18,9 +18,10 @@
   </div>
 </form>         
 
+<br>
 
 
-    <div> Request Table </div>
+    <h3> Pending Requests </h3>
     <table>
   <tr>
     <th class='user-header'> Teacher </th>
@@ -29,9 +30,9 @@
 
   </tr>
   <tr class='user-row' ng-repeat="request in requests.results">
-    <td class='user-row-item' editable-text="request.ToId"></td>
-    <td class='user-row-item' editable-text="request.description"></td>
-    <td class='user-row-item' editable-text="request.email" ></td>
+    <td class='user-row-item' > {{request.teacherName}}</td>
+    <td class='user-row-item' > {{request.description}}</td>
+    <td class='user-row-item'  >{{request.email}}</td>
     <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> Chat Link </a></td>
 
     

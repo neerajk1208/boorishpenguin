@@ -77,7 +77,8 @@ $scope.sampleRequest = {
       .then(function(results) {
         console.log('I am now in here');
         console.log("These are the results HERE", results);
-        $scope.currentUser = results.id;
+
+        $scope.currentUser = results;
         if (results.RoleId === 2) {
           arrayId = [0, results.id];
         } else if (results.RoleId === 3) {
@@ -88,6 +89,12 @@ $scope.sampleRequest = {
             console.log("my requests!", requests);
             console.log('Got the corresponding requests');
             $scope.requests = requests;
+            $scope.requests.results.forEach(function(request) {
+              Users.getUserWithId(request.FromId)
+                .then(function(results) {
+                  request.studentName = results.name;
+                })
+            })
           })
 
       })

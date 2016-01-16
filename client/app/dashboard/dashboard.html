@@ -1,10 +1,16 @@
 <div ng-module='boorish.dashboard'>
+  <h3> {{role}} Information </h3>
   <div>
     <ul ng-model='user'>
       <li>
-        <span>{{user.name}}</span>
-        <span>{{user.email}}</span>
         <img src="{{user.image}}">
+        <span>Full Name: {{currentUser.name}}</span>
+      </li>
+      <li>
+        <span>Email Address: {{currentUser.email}}</span>
+      </li>
+      <li>
+        <span>User Type: {{role}}</span>
       </li>
     </ul>
 

@@ -7,7 +7,11 @@ angular.module('boorish.student', [])
   // Auth.setUser();
   $scope.description
   $scope.ToId;
+  $scope.teacherName;
   $scope.currentUser;
+  $scope.users;
+  $scope.teachers = [];
+  $scope.targetTeacher;
 
   $scope.sampleRequest = {
       FromId: 2,
@@ -16,31 +20,7 @@ angular.module('boorish.student', [])
       description: "hello testing" 
     }
 
-  $scope.requests = {
-    results: [
-      {
-        id: 1, 
-        description: 'I need help with this math problem', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }, 
-      {
-        id: 2, 
-        description: 'What do you do now?', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }, 
-      {
-        id: 3, 
-        description: 'Whaaaat!', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }
-    ]
-  };
+  $scope.requests 
 
   /*
 
@@ -75,8 +55,6 @@ angular.module('boorish.student', [])
 
     Users.getUserWithId()
       .then(function(results) {
-        console.log('I am now in here');
-        console.log("These are the results HERE", results);
         $scope.currentUser = results.id;
         if (results.RoleId === 2) {
           arrayId = [0, results.id];
@@ -88,25 +66,43 @@ angular.module('boorish.student', [])
             console.log("my requests!", requests);
             console.log('Got the corresponding requests');
             $scope.requests = requests;
+            $scope.requests.results.forEach(function(request) {
+              console.log('I am in here');
+              Users.getUserWithId(request.ToId)
+                .then(function(results) {
+                  request.teacherName = results.name;
+                })
+            })
           })
 
       })
   };
 
-  $scope.addRequest = function() {
-    console.log("here is the teacher", $scope.ToId);
-    console.log("here is the description", $scope.description);
-    var request = { 
-      description: $scope.description, 
-      closed: 0, 
-      ToId: $scope.ToId, 
-      FromId: $scope.currentUser
-    };
-    console.log("here is the request I'm sending", request);
-    Requests.newRequest(request)
+  $scope.getUsers = function() {
+    //call getuserbyID service function
+    Users.allUsers()
       .then(function(results) {
-        $scope.getRequests();
+        //add in logic to remove current user from results
+        $scope.users = results;
+        $scope.users.results.forEach(function(user) {
+          if (user.RoleId === 2) {
+            $scope.teachers.push(user);
+          }
+        })
       })
+  };
+
+  $scope.addRequest = function() {
+      var request = { 
+        description: $scope.description, 
+        closed: 0, 
+        ToId: $scope.targetTeacher.id, 
+        FromId: $scope.currentUser
+      };
+      Requests.newRequest(request)
+        .then(function(results) {
+          $scope.getRequests();
+        })
   }
 
   // if user is not authenticated, reroute to /signin
@@ -117,6 +113,7 @@ angular.module('boorish.student', [])
      // $scope.getRequests();
     console.log("I'm here");
     $scope.getRequests();
+    $scope.getUsers();
   }
 
 
