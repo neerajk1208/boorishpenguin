@@ -17,29 +17,7 @@ $scope.sampleRequest = {
     }
 
   $scope.requests = {
-    results: [
-      {
-        id: 1, 
-        description: 'I need help with this math problem', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }, 
-      {
-        id: 2, 
-        description: 'What do you do now?', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }, 
-      {
-        id: 3, 
-        description: 'Whaaaat!', 
-        closed: 0, 
-        ToId: 1, 
-        FromId: 2
-      }
-    ]
+    results: []
   };
 
   /*
@@ -86,9 +64,13 @@ $scope.sampleRequest = {
         }
         Requests.getAll(arrayId)
           .then(function(requests) {
-            console.log("my requests!", requests);
-            console.log('Got the corresponding requests');
             $scope.requests = requests;
+            // requests.results.forEach(function(request) {
+            //   console.log(request)
+            //   if (request.closed === false) {
+            //     $scope.requests.results.push(request);
+            //   }
+            // });
             $scope.requests.results.forEach(function(request) {
               Users.getUserWithId(request.FromId)
                 .then(function(results) {
@@ -99,6 +81,23 @@ $scope.sampleRequest = {
 
       })
   };
+
+  $scope.removeRequest = function(id) {
+    var specificRequest;
+    $scope.requests.results.forEach(function(request) {
+      if (request.id === id) {
+        specificRequest = request;
+      }
+    });
+
+    specificRequest.closed = true;
+    console.log("check it out now", specificRequest);
+    Requests.newRequest(specificRequest)
+      .then(function(results) {
+        console.log("what is it",results);
+        $scope.getRequests();
+   })
+  }
 
   if (!Auth.isAuth()) {
     $location.path('/signin')

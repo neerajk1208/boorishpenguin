@@ -28,7 +28,7 @@
     <th class='user-header'> Link </th>
 
   </tr>
-  <tr class='user-row' ng-repeat="request in requests.results">
+  <tr class='user-row' ng-repeat="request in requests.results | filter: {closed: false}">
     <td class='user-row-item' > {{request.teacherName}}</td>
     <td class='user-row-item' > {{request.description}}</td>
     <td class='user-row-item'  >{{request.email}}</td>
