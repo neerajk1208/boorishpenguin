@@ -1,5 +1,5 @@
 <div ng-module='boorish.dashboard'>
-  <h3> User Information </h3>
+  <h3> {{role}} Information </h3>
   <div>
     <ul ng-model='user'>
       <li>
@@ -10,7 +10,7 @@
         <span>Email Address: {{currentUser.email}}</span>
       </li>
       <li>
-        <span>RoleId: {{currentUser.RoleId}}</span>
+        <span>User Type: {{role}}</span>
       </li>
     </ul>
 

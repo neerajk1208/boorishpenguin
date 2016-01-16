@@ -12,6 +12,15 @@ angular.module('boorish.dashboard', [])
   };
 
   $scope.currentUser = JSON.parse(window.localStorage.getItem('com.boorish.user'));
+  $scope.role;
+
+  if ($scope.currentUser.RoleId === 1) {
+    $scope.role = "Admin";
+  } else if ($scope.currentUser.RoleId === 2) {
+    $scope.role = "Teacher";
+  } else if ($scope.currentUser.RoleId === 3) {
+    $scope.role = "Student";
+  };
 
   $scope.getUserInfo = function() {
     //call getuserbyID service function
