@@ -7,6 +7,7 @@ angular.module('boorish.chatroom', [])
     $scope.user = Auth.getUser();
 
     console.dir($scope.user);
+
     $scope.messages = [];
     $scope.message = '';
     $scope.roomId = $stateParams.id;
@@ -18,7 +19,10 @@ angular.module('boorish.chatroom', [])
     });
 
     socket.on('message', function(message) {
-      console.log('client get message');
+      console.dir(message);
+
+      message.class = 'theirs';
+
       $scope.messages.push(message);
     });
   };
@@ -28,14 +32,19 @@ angular.module('boorish.chatroom', [])
     //emit socket user connect event here
     //emit send message here from socket object
 
+    var timeStr = moment().format('hh:mm a');
+
     var message = {
       user: $scope.user.username, //user name from local storage
       room: $scope.roomName,
       message: $scope.message,
-      image: $scope.user.image
+      image: $scope.user.image,
+      time:timeStr
     };
 
     socket.emit('message', message);
+
+    message.class = 'mine';
 
     $scope.messages.push(message);
   };
