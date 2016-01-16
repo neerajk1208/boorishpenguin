@@ -4,18 +4,25 @@
     <hr>
     
     
-    <table class='chats'>
+    <div class='chats' >
       
-      <tr ng-repeat='message in messages' class='chat-item'>
+      <div ng-repeat='message in messages' ng-switch on="message.class">
         
+        <div ng-switch-when='theirs' class='chat-item'>
+          <span class='chat-photo'><image class='chat-photo' ng-src="{{ message.image }}" /></span>
+          <span class='chat-message {{ message.class }}'>{{ message.message }}</span>
+          <span class='chat-time'>{{message.time}}</span>
+        </div>
+        
+        <div ng-switch-when='mine' class='chat-item'>
+          <span class='chat-message {{ message.class }}'>{{ message.message }}</span>
+          <span class='chat-photo'><image class='chat-photo' ng-src="{{ message.image }}" /></span>         
+          <span class='chat-time'>{{message.time}}</span>
+        </div>
+        
+      </div>
 
-        <td ><image class='chat-photo' ng-src="{{ message.image }}" /></td>
-        <td class='chat-message'>{{ message.message }} </td>
-        <td class='chat-time'>{{ message.time }}</td>
-
-      </tr>
-
-    </table>
+    </div>
     
     <div class="form-group">
       <textarea class="form-control" type='question' ng-model='message' rows='5' cols='80' maxlength="255" ng-trim="true" placeholder='send a message'></textarea>

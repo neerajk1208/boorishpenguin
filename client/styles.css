@@ -165,11 +165,8 @@ select {
   padding-bottom: 10px;
 }
 
-.chat-item > td {
-  padding-bottom: 10px;
-}
-
 .chat-photo {
+  display: inline-block;
   border-radius: 20px;
   width:35px;
   margin-right: 10px;
@@ -182,6 +179,8 @@ select {
 
 .chats {
   width:100%;
+  border-collapse: separate;
+  border-spacing: 10px;
 }
 
 .chat-user {
@@ -190,13 +189,36 @@ select {
 }
 
 .chat-message {
+  display: inline-block;
+  margin:5px;
   font-size: 12px;
-  width: 100%;
+  padding:10px;
+  width: 85%;
+  border-radius: 5px;
+}
+
+.chat-item {
+  white-space: nowrap;
 }
 
 .chat-time {
+  display: inline-block;
   text-align: right;
   white-space: nowrap;
   font-size: 11px;
   opacity: .7;
+}
+
+.theirs {
+  display: inline-block;
+  background-color: lightblue;
+  padding-right:10px;
+  white-space:nowrap
+}
+
+.mine {
+  display: inline-block;
+  background-color: lightgrey;
+  padding-left:10px;
+  white-space:nowrap
 }

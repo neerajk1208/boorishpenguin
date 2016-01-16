@@ -7,6 +7,7 @@ angular.module('boorish.chatroom', [])
     $scope.user = Auth.getUser();
 
     console.dir($scope.user);
+
     $scope.messages = [];
     $scope.message = '';
     $scope.roomId = $stateParams.id;
@@ -19,6 +20,8 @@ angular.module('boorish.chatroom', [])
 
     socket.on('message', function(message) {
       console.dir(message);
+
+      message.class = 'theirs';
 
       $scope.messages.push(message);
     });
@@ -40,6 +43,8 @@ angular.module('boorish.chatroom', [])
     };
 
     socket.emit('message', message);
+
+    message.class = 'mine';
 
     $scope.messages.push(message);
   };
