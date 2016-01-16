@@ -210,15 +210,11 @@ select {
 }
 
 .theirs {
-  display: inline-block;
   background-color: lightblue;
   padding-right:10px;
-  white-space:nowrap
 }
 
 .mine {
-  display: inline-block;
   background-color: lightgrey;
   padding-left:10px;
-  white-space:nowrap
 }
