@@ -11,10 +11,9 @@
   </tr>
   <tr class='user-row' ng-repeat="request in requests.results | filter: {closed: false}">
     <td ng-model='identifier' value="{{request.id}}" class='user-row-item' > {{request.id}} </td>
-    <td class='user-row-item' > {{request.studentName}} </td>
-    <td class='user-row-item'> {{request.description}}</td>
-    <td class='user-row-item'> Enter Chat Room Here:  </td>
-    <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> Chat Link </a></td>
+    <td class='user-row-item desc' > {{request.studentName}} </td>
+    <td class='user-row-item desc'> {{request.description}}</td>
+    <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> <span class='icon-bubble'></span> </a> </td>
     <td><form class="user-row-item" name="f2" ng-submit="removeRequest(request.id)"> 
       <input type="submit" value="Close Request"/> 
     </form>

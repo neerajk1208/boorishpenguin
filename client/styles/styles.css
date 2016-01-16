@@ -324,4 +324,16 @@ video#bgvid {
     opacity: 0.5;
 }
 
+.signin-button {
+  margin-top: 160px;
+  text-align: center;
+}
+
+.button-view {
+  font-size: 30px;
+}
+
+.button-view:hover {
+  font-size: 30px;
+}
 
