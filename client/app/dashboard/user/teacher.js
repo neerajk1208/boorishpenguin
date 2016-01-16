@@ -1,6 +1,6 @@
 angular.module('boorish.teacher', [])
 
-.controller('TeacherController', function($scope, $location, Auth, Users, Requests) {
+.controller('TeacherController', function($scope, $location, socket, Auth, Users, Requests) {
 
   //reference the Requests factory in the controller as a dependency
   // Auth.setUser();
@@ -96,6 +96,10 @@ $scope.sampleRequest = {
       .then(function(results) {
         console.log("what is it",results);
         $scope.getRequests();
+
+        socket.emit('close-request', {
+          id: specificRequest.id
+        });
    })
   }
 
