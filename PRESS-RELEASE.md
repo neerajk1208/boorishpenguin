@@ -17,28 +17,20 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > Boorish Penguin is an educational tool that allows students and teachers an open forum for conversation
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Boorish Penguin is a Q&A style website that allows students and faculty at schools to ask and answer questions. In addition, it provides a one-on-one chat functionality for teachers to help students in real-time. 
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Past alternatives to Q&A websites for education have revolved around services such as Blackboard. While these services provide curriculum information and a vehicle for students to turn in assignments and view material, they provide a poor forum for interaction. 
+
+  Students often resort to means of communication outside of the educational scope, such as WhatsApp and Facebook to communicate, disconnecting them from support from the instutations they are learning from. 
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > By providing an engaging forum in a format that encourages contribution and interaction, Boorish Penguin puts the conversation back in the context of the education. It provides visibility and valuable feedback to teachers, and resources to students, all in one place.
 
-## Quote from You ##
-  > A quote from a spokesperson in your company.
-
-## How to Get Started ##
-  > Describe how easy it is to get started.
-
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  New features include an admin dashboard, which provides teachers and administrators additional visibility and control to understand their students' environment online, and a live help-request function to provide an even more involved and personal layer of interaction.
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Bring online engagement back to your students with Boorish Penguin!

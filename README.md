@@ -1,6 +1,6 @@
-# Project Name
+# Boorish Penguin
 
-> Pithy project description
+> Q&A forum for students and teachers
 
 ## Team
 
@@ -42,7 +42,7 @@ From within the root directory:
 ```sh
 sudo npm install -g bower
 npm install
-in clinet: bower install
+in client: bower install
 ```
 
 
