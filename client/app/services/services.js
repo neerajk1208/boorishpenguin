@@ -4,7 +4,7 @@ angular.module('boorish.services', [])
 
 .factory('Questions', function($http, $location) {
   return {
-    // add a question from /ask
+    // add a question from ask
     addQuestion: function(question) {
 
       return $http({
