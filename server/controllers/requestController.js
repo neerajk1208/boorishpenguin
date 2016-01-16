@@ -1,6 +1,7 @@
 var db = require('../db/index.js');
 
 module.exports = {
+  //Get All Help Requests
   allRequests: function(req, res) {
     var parsedReq = JSON.parse(req.params.idArray)
     var isFromId = parsedReq[0];
@@ -48,7 +49,7 @@ module.exports = {
       })
     }
   },
-
+  //Post New Request or update existing request
   newRequest: function(req, res) {
     if(!req.body.id){
       return db.HelpRequest.create(req.body)

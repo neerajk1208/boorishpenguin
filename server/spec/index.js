@@ -33,20 +33,21 @@ describe("Legacy - Server - REST API Routes", function() {
 
 
   before(function() {
-    //important to stub before we load our app
+    //set stub to bypass oAuth middleware
     ensureAuthenticatedSpy = sinon.stub(oAuth, 'ensureAuth');
-
+    //calls next() when inside ensureAuth
     ensureAuthenticatedSpy.callsArg(2);
 
-
+    //important to stub before we load our app
     agent = require('supertest')
       .agent(require('../server'));
-
-
   });
-
-
-
+  after(function() {
+    // runs after all tests in this block
+    // db.HelpRequest.findOne({description: "updated description"}).then(function(request){
+    //   request.destroy;
+    // })
+  });
   describe('QUESTION AND ANSWER ROUTES', function() {
     describe('GET ALL POSTS', function() {
       it('responds with a 200 (OK) and the json data for all questions', function(done) {
@@ -66,8 +67,6 @@ describe("Legacy - Server - REST API Routes", function() {
             questionId = res.body.id;
           })
           .expect(201, done);
-
-
       })
     })
     describe('Get Question By ID', function() {
@@ -97,7 +96,6 @@ describe("Legacy - Server - REST API Routes", function() {
         var testMod = {
           mod: "like"
         }
-
         agent
           .post('/townhall/questions/' + questionId)
           .set({
@@ -108,8 +106,6 @@ describe("Legacy - Server - REST API Routes", function() {
             expect(res.body).to.exist;
           })
           .expect(201, done);
-
-
       })
     })
     describe('Post New Answer', function() {
@@ -131,13 +127,11 @@ describe("Legacy - Server - REST API Routes", function() {
           .expect(201, done);
       })
     })
-
     describe('Mod Existing Answer', function() {
       it('responds with 201 (Created) and the json data for the modded answer', function(done) {
         var testMod = {
           mod: "like"
         }
-
         agent
           .post('/townhall/answers/' + answerId)
           .set({
@@ -158,8 +152,6 @@ describe("Legacy - Server - REST API Routes", function() {
             "testing": true
           })
           .expect(204, done);
-
-
       })
     })
     describe('Delete Answer', function() {
@@ -173,7 +165,6 @@ describe("Legacy - Server - REST API Routes", function() {
       })
     })
   })
-
   describe('USER ROUTES', function() {
     var testUserChange = {
       //insert test change here
@@ -184,9 +175,7 @@ describe("Legacy - Server - REST API Routes", function() {
       name_first: "test",
       email: null,
       RoleId: 3
-
     }
-
     describe('Get All Users', function() {
       it('responds with a 200 (OK) and the json data for all users', function(done) {
         agent
@@ -194,7 +183,6 @@ describe("Legacy - Server - REST API Routes", function() {
           .expect(200, done);
       })
     })
-
     describe('Mod Existing User', function() {
       it('responds with 201 (Created) and the json data for the modded user', function(done) {
         agent
@@ -238,7 +226,6 @@ describe("Legacy - Server - REST API Routes", function() {
       ToId: 1,
       FromId: 1
     }
-
     var modRequest = {
       //insert test change here
       description: "updated description",
@@ -246,7 +233,6 @@ describe("Legacy - Server - REST API Routes", function() {
       FromId: 1,
       closed: true
     }
-
     describe('Post New Request', function() {
       it('responds with 201 (Created) and the json data for the new request', function(done) {
         agent
@@ -258,7 +244,6 @@ describe("Legacy - Server - REST API Routes", function() {
           .expect(201, done);
       })
     })
-
     describe('Get All Requests', function() {
       it('responds with a 200 (OK) and the json data for all requests', function(done) {
         agent
@@ -272,7 +257,6 @@ describe("Legacy - Server - REST API Routes", function() {
           .expect(200, done);
       })
     })
-
     describe('Mod Existing Request', function() {
       it('responds with 201 (Created) and the json data for the modded request', function(done) {
         agent
@@ -288,6 +272,4 @@ describe("Legacy - Server - REST API Routes", function() {
       })
     })
   })
-
-
 })
