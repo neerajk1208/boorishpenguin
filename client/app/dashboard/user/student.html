@@ -1,10 +1,10 @@
 <div ng-module='boorish.student'>
   <div ng-controller='StudentController'>
 
-    <h3> Make a Help Request </h3>
+    <h3>Make a Help Request</h3>
 
 
-    <form id="contact_form" ng-submit="addRequest()" enctype="multipart/form-data">
+    <form id="contact_form" ng-submit="addRequest()" enctype="multipart/form-data" style='margin-left:18px;'>
   <div class="row form-group">
     <label for="name">Choose a teacher: </label>  
     <select ng-options="teacher.name for teacher in teachers" ng-model="targetTeacher"> </select>
@@ -19,20 +19,19 @@
 </form>         
 
 <br>
-
-    <h3> Pending Requests </h3>
+    <h3>Pending Requests</h3>
     <table>
   <tr>
     <th class='user-header'> Teacher </th>
     <th class='user-header'> Description </th>
+
     <th class='user-header'> Link </th>
 
   </tr>
   <tr class='user-row' ng-repeat="request in requests.results | filter: {closed: false}">
     <td class='user-row-item' > {{request.teacherName}}</td>
-    <td class='user-row-item' > {{request.description}}</td>
-    <td class='user-row-item'  >{{request.email}}</td>
-    <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> Chat Link </a></td>
+    <td class='user-row-item desc' > {{request.description}}</td>
+    <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> <span class='icon-bubble'></span> </a> </td>
 
     
     <!-- <form ng-show="editing" ng-submit="editing = false">

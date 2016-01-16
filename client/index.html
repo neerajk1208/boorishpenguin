@@ -16,13 +16,10 @@
     <div class="navigation"> 
       <div class="container">
         <div class="navs col-md-8 col-md-offset-2 header-icon">Welcome {{currentUser.name_first}}!
-          <a ui-sref="home">
-            <span class="header-icon icon-home"></span>
-            <span>Home</span></a>
-            <a href="#/ask">
-            <span class="header-icon icon-pencil"></span>
-            <span>Ask</span>
-          </a>
+          <a style='margin-left:50px;'ui-sref="home"><span class="header-icon icon-home"></span></a>
+          <a href="#/ask"><span class="header-icon icon-question"></span></a>
+          <a href="#/dashboard"><span class="header-icon header-item icon-settings2"></span></a>
+      
           <form class="search-box"> 
               <div class="input-group"> 
                 <input type="text" class="form-control" ng-model='searchText' placeholder="Search for...">
@@ -33,7 +30,7 @@
           </form>
 
           <div>
-            <a href="#/dashboard"><span class="header-icon header-item icon-user"></span></a>
+            
             <a href="#/signout"><span class="header-icon icon-switch"></span></a>
           </div>
         </div>
