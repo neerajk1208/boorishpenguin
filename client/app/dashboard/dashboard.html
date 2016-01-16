@@ -2,21 +2,29 @@
 
   <h3> {{role}} Information </h3>
 
-  <h3> User Information </h3>
-  <div>
-    <ul ng-model='user'>
-      <li>
-        <img src="{{user.image}}">
-        <span>Full Name: {{currentUser.name}}</span>
-      </li>
-      <li>
-        <span>Email Address: {{currentUser.email}}</span>
-      </li>
-      <li>
-        <span>User Type: {{role}}</span>
-      </li>
-    </ul>
-
+  
+  
+    
+  <p>
+    
+      <img class="user-photo" style='float:left;margin-right:15px;' src="{{user.image}}">
+    
+      <ul ng-model='user'>
+        <li>
+          <span>Full Name: {{currentUser.name}}</span>
+        </li>
+        <li>
+          <span>Email Address: {{currentUser.email}}</span>
+        </li>
+        <!-- <li>
+          <span>User Type: {{role}}</span>
+        </li> -->
+      </ul>
+    
+  </p>
+  
+  
+  <h3> Users </h3>
     <div ui-view> </div>
-  </div>
+
 </div>

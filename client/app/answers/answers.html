@@ -20,7 +20,7 @@
       <hr>
       <div class="col-xs-3">
         <div>
-          <img ng-src="{{ data.question.imgUrl }}0" width="64" height="64">
+          <img ng-src="{{ data.question.imgUrl }}0" class="user-photo" width="64" height="64">
         </div>
         <!-- number of points current on question -->
         <a href="" type='submit'  ng-click='updateQuestion("like")'>
@@ -46,7 +46,7 @@
       <div ng-repeat='answer in data.answers' class="answer-page-item">
         <div class="col-xs-3">
           <div>
-            <img ng-src="{{ answer.imgUrl }}0" width="64" height="64">
+            <img ng-src="{{ answer.imgUrl }}0" class="user-photo" width="64" height="64">
           </div>
           <div>
             <a href="" type='submit'  ng-click='updateAnswer($index, "like")'>

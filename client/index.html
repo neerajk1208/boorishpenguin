@@ -2,20 +2,25 @@
 <html ng-app="boorishpenguin">
   <head lang="en">
     <meta charset="UTF-8">
-    <title>BoorishPenguin</title>
+    <title>DirtyOrca</title>
+     <link rel="icon" type="image/png" href="styles/favicon.ico">
+
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha256-QSktus/KATft+5BD6tKvAwzSxP75hHX0SrIjYto471M= sha512-787L1W8XyGQkqtvQigyUGnPxsRudYU2fEunzUP5c59Z3m4pKl1YaBGTcdhfxOfBvqTmJFmb6GDgm0iQRVWOvLQ==" crossorigin="anonymous">
-    <link href="styles.css" rel="stylesheet">
+    
+    <link href="styles/styles.css" rel="stylesheet">
+
+    <link href="styles/icomoon/style.css" rel="stylesheet">
   </head>
   <body ng-controller="MainController">
 
     <div class="navigation"> 
       <div class="container">
-        <div class="navs col-md-8 col-md-offset-2"> Welcome {{currentUser.name_first}}!
+        <div class="navs col-md-8 col-md-offset-2 header-icon">Welcome {{currentUser.name_first}}!
           <a ui-sref="home">
-            <span class="glyphicon glyphicon-home"></span>
+            <span class="header-icon icon-home"></span>
             <span>Home</span></a>
             <a href="#/ask">
-            <span class="glyphicon glyphicon-edit"></span>
+            <span class="header-icon icon-pencil"></span>
             <span>Ask</span>
           </a>
           <form class="search-box"> 
@@ -27,9 +32,9 @@
               </div>
           </form>
 
-          <div class="dropdown">
-            <a href="#/dashboard">
-              <img src="https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="32" height="32"></a>
+          <div>
+            <a href="#/dashboard"><span class="header-icon header-item icon-user"></span></a>
+            <a href="#/signout"><span class="header-icon icon-switch"></span></a>
           </div>
         </div>
       </div>
@@ -42,8 +47,6 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"> </script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-<!--     // <script src="http://timeago.yarp.com/jquery.timeago.js"></script>
- -->
     <script src="bower_components/angular-editable-text/dist/angular-editable-text.min.js"></script>
     <script src="bower_components/socket.io-client/socket.io.js"> </script>
 
