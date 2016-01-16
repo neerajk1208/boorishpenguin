@@ -1,10 +1,13 @@
 body {
+  color: #888;
+  font: 300 14px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h3 {
-  font-weight: bold;
+
+  font-weight: 500;
   text-transform: uppercase;
-  color: #555555;
+  color: #293f50;
 }
 
 select {
@@ -16,11 +19,51 @@ select {
 }
 
 .navigation {
-  /*copying navbar-default*/
-  margin-bottom: 20px;
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
-  border-bottom: 4px solid #e7e7e7;
+    margin-bottom: 20px;
+    background-color: #293f50;
+    color:#00CCFF;
+    border-bottom: 2px solid #e7e7e7;
+}
+
+.btn {
+    padding: 9px 12px 7px;
+     border-width: 0 0px 0px 0px; 
+     font-size: 12px; 
+     font-weight: 500; 
+    text-transform: uppercase;
+}
+
+.btn:hover {
+  margin-top:0px;
+    padding: 9px 12px 7px;
+    border-width: 0 0px 0px 0px; 
+    font-size: 12px; 
+    font-weight: 500; 
+    text-transform: uppercase;
+}
+
+.btn-default {
+    color: #555555;
+    background-color: lightgrey;
+    border-color: #e2e2e2;
+}
+
+.btn-default:hover {
+    background-color: #555555;
+    color: #eeeeee;
+    border-color: #e2e2e2;
+}
+
+.btn-primary {
+    background-color: #293f50;
+    color:#00CCFF;
+    border-color: #127ba3;
+}
+
+.btn-primary:hover {
+    color: #293f50;
+    background-color:#00CCFF;
+    border-color: #127ba3;
 }
 
 .navs {
@@ -38,9 +81,14 @@ select {
   padding: 5px;
 }
 
+a {
+  color: #293f50;
+}
+
 .navs > a {
   /*background-color:darkgrey;*/
   padding: 6px;
+  color:#00CCFF;
 }
 .navs > a > span {
   padding: 2px;
@@ -90,6 +138,7 @@ select {
   align-items: center;
   align-content: center;
   align-content: center;
+  border-radius: 5px;
 }
 
 .answer-page-item {
@@ -136,8 +185,11 @@ select {
 }
 
 .tag, .course {
-  padding: 10px;
-  background-color: lightblue;
+
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #293f50;
+    color:#00CCFF;
   display: inline-block;
 }
 
@@ -151,6 +203,7 @@ select {
 }
 
 .user-header {
+  font-weight:500;
   width: 100px;
 }
 
@@ -217,4 +270,22 @@ select {
 .mine {
   background-color: lightgrey;
   padding-left:10px;
+}
+
+.header-item {
+  padding-right:10px;
+}
+
+.header-icon {
+  font-size: 20px;
+  color:#00CCFF;
+}
+
+.user-photo {
+  border-radius: 20px;
+}
+
+ul
+{
+    list-style-type: none;
 }

@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'icomoon';
+    src:    url('fonts/icomoon.eot?p3n3fl');
+    src:    url('fonts/icomoon.eot?p3n3fl#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?p3n3fl') format('truetype'),
+        url('fonts/icomoon.woff?p3n3fl') format('woff'),
+        url('fonts/icomoon.svg?p3n3fl#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+    content: "\e900";
+}
+.icon-home2:before {
+    content: "\e901";
+}
+.icon-home3:before {
+    content: "\e902";
+}
+.icon-newspaper:before {
+    content: "\e904";
+}
+.icon-pencil:before {
+    content: "\e905";
+}
+.icon-phone:before {
+    content: "\e942";
+}
+.icon-bubble:before {
+    content: "\e96b";
+}
+.icon-switch:before {
+    content: "\e9b6";
+}
+.icon-question:before {
+    content: "\ea09";
+}
+.icon-google:before {
+    content: "\ea87";
+}
+.icon-user:before {
+    content: "\e903";
+}
+
