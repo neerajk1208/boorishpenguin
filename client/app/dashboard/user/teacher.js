@@ -89,6 +89,12 @@ $scope.sampleRequest = {
             console.log("my requests!", requests);
             console.log('Got the corresponding requests');
             $scope.requests = requests;
+            $scope.requests.results.forEach(function(request) {
+              Users.getUserWithId(request.FromId)
+                .then(function(results) {
+                  request.studentName = results.name;
+                })
+            })
           })
 
       })
