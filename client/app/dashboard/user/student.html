@@ -6,8 +6,8 @@
 
     <form id="contact_form" ng-submit="addRequest()" enctype="multipart/form-data">
   <div class="row form-group">
-    <label for="name">Which teacher would you like to ask help from?</label><br />
-    <input ng-model="ToId" id="name" class="input" name="name" type="text" value="" size="30" /><br />
+    <label for="name">Choose a teacher: </label>  
+    <select ng-options="teacher.name for teacher in teachers" ng-model="targetTeacher"> </select>
   </div>
   <div class="row form-group">
     <label for="message">Please explain your topic of concern!</label><br />
@@ -20,11 +20,6 @@
 
 <br>
 
-<select name="select">
-  <option value="value1">Value 1</option> 
-  <option value="value2" selected>Value 2</option>
-  <option value="value3">Value 3</option>
-</select>
 
     <h3> Pending Requests </h3>
     <table>

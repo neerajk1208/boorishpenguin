@@ -11,6 +11,7 @@ angular.module('boorish.student', [])
   $scope.currentUser;
   $scope.users;
   $scope.teachers = [];
+  $scope.targetTeacher;
 
   $scope.sampleRequest = {
       FromId: 2,
@@ -54,8 +55,6 @@ angular.module('boorish.student', [])
 
     Users.getUserWithId()
       .then(function(results) {
-        console.log('I am now in here');
-        console.log("These are the results HERE", results);
         $scope.currentUser = results.id;
         if (results.RoleId === 2) {
           arrayId = [0, results.id];
@@ -90,36 +89,20 @@ angular.module('boorish.student', [])
             $scope.teachers.push(user);
           }
         })
-        console.log("these are the teachers!", $scope.teachers)
       })
   };
 
   $scope.addRequest = function() {
-    console.log("here is the teacher", $scope.ToId);
-    console.log("here is the description", $scope.description);
-    var specificTeacher;
-    $scope.teachers.forEach(function(teacher) {
-      if ($scope.ToId !== teacher.name) {
-        console.log("Sorry, that is not a valid teacher name!");
-      } else {
-        specificTeacher = teacher;  
-      }
-    })
-    if (specificTeacher) {
-
       var request = { 
         description: $scope.description, 
         closed: 0, 
-        ToId: specificTeacher.id, 
+        ToId: $scope.targetTeacher.id, 
         FromId: $scope.currentUser
       };
-      console.log("here is the request I'm sending", request);
       Requests.newRequest(request)
         .then(function(results) {
           $scope.getRequests();
         })
-      
-    }
   }
 
   // if user is not authenticated, reroute to /signin

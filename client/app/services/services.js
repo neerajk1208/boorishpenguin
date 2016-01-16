@@ -147,6 +147,7 @@ angular.module('boorish.services', [])
       } else {
         userID = $window.localStorage.getItem('com.boorish');
       }
+      console.log("this is the userID", userID);
       return $http({
         method: 'GET',
         url: '/townhall/users/' + userID
