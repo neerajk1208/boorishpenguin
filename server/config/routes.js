@@ -10,24 +10,23 @@ var passport = require('passport');
 
 
 module.exports = function(app, express) {
-  
+  //Question Routes
   app.get('/townhall/questions', oAuth.ensureAuth, questionControllers.allQuestions);
   app.post('/townhall/questions', oAuth.ensureAuth, questionControllers.newQuestion);
   app.delete('/townhall/questions/:id', oAuth.ensureAuth, questionControllers.deleteQuestion);
-
+  //Question :id Routes
   app.get('/townhall/questions/:id', oAuth.ensureAuth, questionControllers.readQuestion);
   app.post('/townhall/questions/:id', oAuth.ensureAuth, questionControllers.modQuestion);
-
+  //Answer Route and ID Routes
   app.post('/townhall/answers', oAuth.ensureAuth, answerControllers.newAnswer);
   app.post('/townhall/answers/:id', oAuth.ensureAuth, answerControllers.modAnswer);
   app.delete('/townhall/answers/:id', oAuth.ensureAuth, answerControllers.deleteAnswer);
-
+  //User Routes and ID Routes
   app.get('/townhall/users', oAuth.ensureAuth, userControllers.allUsers);
-
   app.post('/townhall/users', oAuth.ensureAuth, userControllers.modUser); //used to modify users to be admins.
   app.get('/townhall/users/:id', oAuth.ensureAuth, userControllers.oneUser);
   app.get('/townhall/users/roles/:roleId', oAuth.ensureAuth, userControllers.readRole);
-  
+  //Help Request Routes
   app.get('/townhall/helpRequest/:idArray', oAuth.ensureAuth, requestControllers.allRequests);//allreuests will have a toggle inside of it, in the presence of a from id, it will return all the requests with that form id, otherwise it will return all reuqests with the specified toId.
   app.post('/townhall/helpRequest', oAuth.ensureAuth, requestControllers.newRequest);//newRequest will have a toggle that checks if a userId exists for the passed in object, if it does not it will create a newUser, otherwise it will modify the specified user.
 

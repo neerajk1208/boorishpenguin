@@ -95,7 +95,7 @@ var Role = db.define('Role',{
   }, {
     timestamps: false
 })
-
+//HelpRequest Table Setup
 var HelpRequest = db.define('HelpRequest', {
     description: Sequelize.STRING,
     closed: {
