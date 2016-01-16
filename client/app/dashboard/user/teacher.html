@@ -3,16 +3,22 @@
      <h3> Pending Help Requests </h3>
     <table>
   <tr>
+    <th class='user-header'> Request Id </th>
     <th class='user-header'> Student </th>
     <th class='user-header'> Description </th>
     <th class='user-header'> Link </th>
 
   </tr>
-  <tr class='user-row' ng-repeat="request in requests.results">
+  <tr class='user-row' ng-repeat="request in requests.results | filter: {closed: false}">
+    <td ng-model='identifier' value="{{request.id}}" class='user-row-item' > {{request.id}} </td>
     <td class='user-row-item' > {{request.studentName}} </td>
     <td class='user-row-item'> {{request.description}}</td>
     <td class='user-row-item'> Enter Chat Room Here:  </td>
     <td class='user-row-item'><a href='#/chatroom/{{request.id}}'> Chat Link </a></td>
+    <td><form class="user-row-item" name="f2" ng-submit="removeRequest(request.id)"> 
+      <input type="submit" value="Close Request"/> 
+    </form>
+  </td>
 
     
     <!-- <form ng-show="editing" ng-submit="editing = false">

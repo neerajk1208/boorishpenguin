@@ -22,6 +22,7 @@ angular.module('boorish.dashboard', [])
     $scope.role = "Student";
   };
 
+
   $scope.getUserInfo = function() {
     //call getuserbyID service function
     Users.getUserWithId()

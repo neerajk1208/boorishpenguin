@@ -20,7 +20,9 @@ angular.module('boorish.student', [])
       description: "hello testing" 
     }
 
-  $scope.requests 
+  $scope.requests = {
+    results: []
+  }
 
   /*
 
@@ -63,8 +65,6 @@ angular.module('boorish.student', [])
         }
         Requests.getAll(arrayId)
           .then(function(requests) {
-            console.log("my requests!", requests);
-            console.log('Got the corresponding requests');
             $scope.requests = requests;
             $scope.requests.results.forEach(function(request) {
               console.log('I am in here');
