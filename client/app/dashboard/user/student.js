@@ -102,6 +102,10 @@ angular.module('boorish.student', [])
       Requests.newRequest(request)
         .then(function(results) {
           $scope.getRequests();
+          
+          socket.emit('new-request', {
+            request: true
+          });
         })
   }
 

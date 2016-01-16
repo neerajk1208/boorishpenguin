@@ -47,6 +47,12 @@ module.exports = function(socket) {
     });
   });
 
+  socket.on('new-request', function(data) {
+    socket.broadcast.emit('new-request', {
+      request: true
+    });
+  });
+
   socket.on('stop typing', function() {
     socket.broadcast.emit('stop typing', {
       username: socket.username
