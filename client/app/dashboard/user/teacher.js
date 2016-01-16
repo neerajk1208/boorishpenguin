@@ -110,6 +110,10 @@ $scope.sampleRequest = {
      // $scope.getRequests();
     console.log("I'm here");
     $scope.getRequests();
+
+    socket.on('new-request', function(data) {
+      $scope.getRequests();
+    })
   }
 
 });
