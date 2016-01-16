@@ -1,10 +1,7 @@
 <div ng-module='boorish.dashboard'>
 
-  <h3> {{role}} Information </h3>
+  <h2> {{role}} Information </h2>
 
-  
-  
-    
   <p>
     
       <img class="user-photo" style='float:left;margin-right:15px;' src="{{user.image}}">
@@ -16,14 +13,10 @@
         <li>
           <span>Email Address: {{currentUser.email}}</span>
         </li>
-        <!-- <li>
-          <span>User Type: {{role}}</span>
-        </li> -->
       </ul>
     
   </p>
-  
-  
+
     <div ui-view> </div>
 
 </div>

@@ -2,10 +2,10 @@
   <div ng-model='data.question' class="question-page-item">
     <div class="answer-content">
       <div class="question-header">
-        <h3 class="">
+        <h2 class="">
           {{ data.question.title }}
           <span class="glyphicon glyphicon-ok-sign" ng-if="data.question.isGood == true"></span>
-        </h3>
+        </h2>
         <div class="dropdown" style="margin-left: auto">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Mark
@@ -41,7 +41,7 @@
 
    <div ng-model='data.answers'  >
      <div class="answer-content">
-      <h3>{{data.answers.length}} Answers</h3>
+      <h4>{{data.answers.length}} Answers</h4>
       <hr>
       <div ng-repeat='answer in data.answers' class="answer-page-item">
         <div class="col-xs-3">
@@ -76,7 +76,7 @@
   </div>
 
   <div>
-    <h3>Your answer</h3>
+    <h4>Your answer</h4>
     <form>
       <div class="form-group">
         <textarea class="form-control" rows='5' cols='80' ng-model='newAnswer.text' maxlength="255" ng-trim="false"  placeholder='Write your answer'></textarea>
