@@ -1,8 +1,6 @@
  <div ng-module='boorish.chatroom'>
   <form>
-    <h3>CHAT ROOM</h3>
-    <hr>
-    
+    <h3>HELP DESK SESSION</h3>
     
     <div class='chats' >
       
@@ -16,21 +14,20 @@
         
         <div ng-switch-when='mine' class='chat-item'>
           <span class='chat-message {{ message.class }}'>{{ message.message }}</span>
-          <span class='chat-photo'><image class='chat-photo' ng-src="{{ message.image }}" /></span>         
+          <span class='chat-photo'><image class='chat-photo' ng-src="{{ message.image }}" /></span>     
           <span class='chat-time'>{{message.time}}</span>
         </div>
         
       </div>
-
     </div>
     
     <div class="form-group">
       <textarea class="form-control" type='question' ng-model='message' rows='5' cols='80' maxlength="255" ng-trim="true" placeholder='send a message'></textarea>
     </div>
 
-
     <div class="form-group pull-right">
-      <input class="btn btn-primary" type='submit' ng-click='sendMessage()' value='Send'>
+      <input class="btn btn-primary" type='submit' ng-click='sendMessage()' value='Send' />
     </div>
+    
   </form>
 </div>

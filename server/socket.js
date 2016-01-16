@@ -8,9 +8,9 @@ module.exports = function(socket) {
     users: []
   });
 
-  //todo - private chat by room id
   socket.on('message', function(data) {
     console.log('message at server - ' + data);
+    
     socket.in(data.room).broadcast.emit('message', {
       room: data.room,
       user: data.user,
@@ -18,31 +18,29 @@ module.exports = function(socket) {
       message: data.message,
       time: data.time
     });
+
   });
 
   // when the client emits 'enter', this listens and executes
-  socket.on('enter', function(user) {
-    console.log('user entered room:' + user.room);
-    socket.username = user.username;
-    socket.join(user.room);
+  socket.on('enter', function(data) {
+    socket.username = data.user;
+    socket.join(data.room);
 
-    //socket.emit('entered', user);
-
-    // echo globally (all clients) that a person has connected
-    socket.in(user.room).broadcast.emit('user joined', {
-      name: user.username,
-      room: user.room
+    socket.in(data.room).broadcast.emit('user joined', {
+      room: data.room,
+      user: data.user,
+      image: data.image,
+      message: data.user + ' joined help desk session...',
+      time: data.time
     });
   });
 
-  // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function() {
     socket.broadcast.emit('typing', {
       username: socket.username
     });
   });
 
-  // when the client emits 'stop typing', we broadcast it to others
   socket.on('stop typing', function() {
     socket.broadcast.emit('stop typing', {
       username: socket.username
