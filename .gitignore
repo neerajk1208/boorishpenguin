@@ -2,7 +2,6 @@
 .idea/
 *.iml
 
-
 ### NODE ###
 build/
 dist/
@@ -11,3 +10,4 @@ client/bower_components/
 
 .DS_Store
 */.DS_Store
+client/app/.DS_Store
