@@ -10,7 +10,7 @@ var controllers = require('./controllers/userControllers.js');
 
 var app = express();
 
-// Hook Socket.io into Express
+// connect socket.io to express
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'hi' , resave: true, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 require('./config/routes.js')(app, express);
 
 app.set("port", process.env.PORT || 8001);
@@ -35,8 +36,6 @@ if (!module.parent) {
   console.log("Listening on", app.get("port"));
 }
 
-// app.listen(port);
-
 /* If you decide to move passport functionality to another file make sure you use the same instance of passport
 rather than requiring passport in multiple files */
 passport.serializeUser(function(user, done) {
@@ -47,12 +46,11 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// When user logged in does a get req to auth/google/callback
+// when user logged in does a get req to auth/google/callback
 passport.use(new GoogleStrategy({
   clientID: apikeys.googleOauth.clientID,
   clientSecret: apikeys.googleOauth.clientSecret,
-  // callbackURL: "http://studius.radelmann.io/auth/google/callback"
-  callbackURL: "http://127.0.0.1:8001/auth/google/callback"
+  callbackURL: apikeys.callbackURL
 },
   function(accessToken, refreshToken, profile, done) {
     controllers.isUserInDb(profile.emails[0].value, function (inDb){
