@@ -1,4 +1,4 @@
-# Boorish Penguin
+# StudiUs
 
 > Q&A forum for students and teachers
 
